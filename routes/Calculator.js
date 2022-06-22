@@ -338,35 +338,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -402,35 +444,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -464,35 +548,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -526,35 +652,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -588,35 +756,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -650,35 +860,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -712,35 +964,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -774,35 +1068,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -836,35 +1172,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -898,35 +1276,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -960,35 +1380,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1022,35 +1484,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1084,35 +1588,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1146,35 +1692,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1208,35 +1796,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1270,35 +1900,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1332,35 +2004,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1394,35 +2108,77 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('RM');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('RM');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'MYR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('¥');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('¥');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'JPY',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('NT$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('NT$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'NTD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('S$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('S$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'SGD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            setCurrencySymbol('HK$');
-            setFinalPrice(final_price);
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
+            // setCurrencySymbol('HK$');
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1434,37 +2190,79 @@ export default function CalculatorScreen({ navigation }) {
   const [pricing, setPricing] = useState('');
   const onValueChange = currencyvalue => {
     if (currencyvalue == 'MYR') {
-      setCurrencySymbol('RM');
+      // setCurrencySymbol('RM');
       setDefaultState('MYR');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR)).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR))
+      // const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR)).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'MYR',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
     } else if (currencyvalue == 'USD') {
-      setCurrencySymbol('$');
+      // setCurrencySymbol('$');
       setDefaultState('USD');
-      const final_price = (parseFloat(data) * 1).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * 1)
+      // const final_price = (parseFloat(data) * 1).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
     }
     else if (currencyvalue == 'TWD') {
-      setCurrencySymbol('NT$');
+      // setCurrencySymbol('NT$');
       setDefaultState('TWD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD)).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD))
+      // const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD)).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'NTD',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
     } else if (currencyvalue == 'SGD') {
-      setCurrencySymbol('S$');
+      // setCurrencySymbol('S$');
       setDefaultState('SGD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD)).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD))
+      // const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD)).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'SGD',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
 
     } else if (currencyvalue == 'JPY') {
-      setCurrencySymbol('¥');
+      // setCurrencySymbol('¥');
       setDefaultState('JPY');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY)).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY))
+      // const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY)).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'JPY',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
     } else if (currencyvalue == 'HKD') {
-      setCurrencySymbol('HK$');
+      // setCurrencySymbol('HK$');
       setDefaultState('HKD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD)).toFixed(2)
-      setFinalPrice(final_price);
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD))
+      // const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD)).toFixed(2)
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'HKD',
+      });
+      const newFinalPrice = formatter.format(final_price);
+      setFinalPrice(newFinalPrice);
+      // setFinalPrice(final_price);
     }
 
   };
@@ -1843,7 +2641,8 @@ export default function CalculatorScreen({ navigation }) {
                   borderBottomLeftRadius: 0,
                   borderLeftColor: '#808080',
                 }}>
-                <Text style={styles.scrollAreaTitle2}>{currencySymbol}{finalPrice}</Text>
+                <Text style={styles.scrollAreaTitle2}>{finalPrice}</Text>
+                {/* <Text style={styles.scrollAreaTitle2}>{currencySymbol}{finalPrice}</Text> */}
               </View>
 
             </View>
