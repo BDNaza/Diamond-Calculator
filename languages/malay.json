@@ -1,0 +1,31 @@
+{
+    "translation":{
+        "Home":"Utama",
+  
+        "Price":"Harga",
+        "Price-update-date":"11 Februari 2022",
+        "Shape":"Bentuk",
+        "Color":"Warna",
+        "Clarity":"Kejelasan",
+        "Carat":"Karat",
+        "Calculate":"Jumlah",
+        "Diamond_price":"Harga Berlian",
+        "Diamond_price/carat":"Harga Berlian dalam Ratus US$ Per Karat",
+      
+        "Calculator":"Kalkulator",
+        "Discount":"Diskaun Potongan Berlian",
+        "PurchasePrice":"Harga Pembelian",
+  
+        "Settings":"Tetapan",
+        "Price-update":"Kemas Kini Harga Pada",
+        "Currency":"Mata Wang",
+        "Language":"Bahasa",
+        "Share_App":"Kongsi Aplikasi",
+        "Contact_Author":"Hubungi Pengarang",
+        "Reset":"Tetapkan semula",
+        "Terms_and_conditions":"Terma dan syarat",
+        "TNC_description":"Applikasi Diamond Calculator dicipta untuk membantu pengguna dalam menentukan anggaran julat harga untuk berlian berdasarkan kriteria yang tersedia cth: Warna, Karat, Kejelasan dan bentuk. Harga yang ditunjukkan adalah anggaran berdasarkan harga berlian yang dikemas kini. Kami tidak bertanggungjawab terhadap sebarang kerugian yang disebabkan oleh penggunaan aplikasi ini. Terima kasih kerana menggunakan aplikasi ini. \n\nUntuk maklumat lanjut sila lawati Crane Inc."
+  
+    }
+  }
+  

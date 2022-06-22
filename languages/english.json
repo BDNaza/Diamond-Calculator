@@ -1,0 +1,31 @@
+{
+    "translation":{
+        "Home":"Home",
+  
+        "Price":"Price",
+        "Price-update-date":"11 February 2022",
+        "Shape":"Shape",
+        "Color":"Color",
+        "Clarity":"Clarity",
+        "Carat":"Carat",
+        "Calculate":"Calculate",
+        "Diamond_price":"Diamond Price",
+        "Diamond_price/carat":"Diamond Price in hundreds US$ Per Carat",
+  
+        "Calculator":"Calculator",
+        "Discount":"Cut Discount",
+        "PurchasePrice":"Purchase Price",
+  
+        "Settings":"Settings",
+        "Price-update":"Price Update On",
+        "Currency":"Currency",
+        "Language":"Language",
+        "Share_App":"Share App",
+        "Contact_Author":"Contact Author",
+        "Reset":"Reset",
+        "Terms_and_conditions":"Terms and Conditions",
+        "TNC_description":"Diamond calculator is created to assist users in determining the estimated price range for diamonds based on available criteria eg: Color, Rust, Clarity and shape. The price shown is an estimate based on the updated diamond price. We are not responsible for any losses caused by the use of this application. Thank you for using this app. \n\nFor more information please visit Crane Inc."
+
+    }
+  }
+  
