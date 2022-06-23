@@ -2361,13 +2361,14 @@ export default function CalculatorScreen({ navigation }) {
               />
             </View>
 
-            <View style={{ width: '50%', justifyContent: 'space-evenly' }}>
+            <View style={{ width: '50%', justifyContent: 'space-evenly', }}>
               <Text
                 style={{
                   color: '#fff',
                   marginBottom: -10,
                   fontWeight: '600',
                   fontSize: 15,
+                  marginLeft: '5%'
                 }}>
                 {t('Clarity')}
               </Text>
@@ -2389,12 +2390,14 @@ export default function CalculatorScreen({ navigation }) {
                   height: 50,
                   width: '95%',
                   borderRadius: 5,
+                  marginLeft: '5%'
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
                   height: 90,
                   width: '95%',
+                  marginLeft: '5%'
                 }}
                 labelStyle={{
                   textAlign: 'center',
@@ -2407,6 +2410,7 @@ export default function CalculatorScreen({ navigation }) {
                   marginBottom: -10,
                   fontWeight: '600',
                   fontSize: 15,
+                  marginLeft: '5%'
                 }}>
                 {t('Shape')}
               </Text>
@@ -2426,12 +2430,14 @@ export default function CalculatorScreen({ navigation }) {
                   borderColor: '#fff',
                   height: 50,
                   width: '95%',
+                  marginLeft: '5%',
                   borderRadius: 5,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
                   width: '95%',
+                  marginLeft: '5%'
                 }}
                 labelStyle={{
                   textAlign: 'center',
@@ -2692,7 +2698,7 @@ const styles = StyleSheet.create({
     // height: '35%',
     height: 200,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: '90%',
   },
   dropdownarea: {
