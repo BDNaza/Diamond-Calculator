@@ -1,4 +1,4 @@
-package com.diamond.newarchitecture.modules;
+package com.diamondcrane.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

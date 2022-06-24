@@ -1,4 +1,4 @@
-package com.diamond;
+package com.diamondcrane;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
