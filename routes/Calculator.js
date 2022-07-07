@@ -8,18 +8,16 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image,
+  TouchableWithoutFeedback
 } from 'react-native';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useTranslation } from 'react-i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
 // import CurrencyDropdown from '../function/currencyDropdown';
 
-const bgimg = {
-  uri: 'https://www.crane-a.co.jp/en/wp-content/themes/lotus_tcd039a/img/diamondapp/mobile/main-bg.jpg',
-};
-
 export default function CalculatorScreen({ navigation }) {
   const { t, i18n } = useTranslation();
-
+  const dropDownRef = React.useRef();
   const onColorOpen = useCallback(() => {
     setClarityOpen(false);
     setShapeOpen(false);
@@ -223,7 +221,13 @@ export default function CalculatorScreen({ navigation }) {
     setData('0.00');
     setFinalPrice('0.00');
   };
-
+  const test = () => {
+    setColorOpen(false);
+    setShapeOpen(false);
+    setDiscountOpen(false);
+    setPurchaseOpen(false);
+    setCurrencyOpen(false);
+  }
   //Currency Dropdown
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currencyvalue, setCurrencyValue] = useState('USD');
@@ -2083,7 +2087,7 @@ export default function CalculatorScreen({ navigation }) {
     } else if (text >= 10.0 && text <= 10.99) {
       fetch('https://www.jewel-cafe-staff.com/api/showPrice', {
         method: 'GET',
-        headers: {
+        ers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -2267,395 +2271,420 @@ export default function CalculatorScreen({ navigation }) {
 
   };
   return (
-    <SafeAreaView style={styles.main}>
-      <ImageBackground
-        source={bgimg}
-        resizeMode="cover"
-        style={styles.background}>
-        <View style={styles.head}>
-          <Image
-            source={require('../assets/navIcon/DiamondIcon.png')}
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 80,
-              resizeMode: 'contain',
-              tintColor: '#fff',
-            }} />
-          <Text style={styles.headTitle}>{t('Calculator')}</Text>
-        </View>
-        <View style={styles.body}>
-          <View style={styles.scrollArea}>
-            <View style={{ width: '50%', justifyContent: 'space-evenly', }}>
-              <Text
-                style={{
-                  color: '#fff',
-                  marginBottom: -10,
-                  fontWeight: '600',
-                  fontSize: 15,
-                }}>
-                {t('Color')}
-              </Text>
-              <DropDownPicker //Color
-                selectedValue={coloritems}
-                defaultValue={'E'}
-                open={colorOpen}
-                onOpen={onColorOpen}
-                value={colorvalue}
-                items={coloritems}
-                setOpen={setColorOpen}
-                setValue={setColorValue}
-                setItems={setColorItems}
-                zIndex={3000}
-                zIndexInverse={1000}
-                style={{
-                  borderColor: '#fff',
-                  height: 50,
-                  width: '95%',
-                  textAlign: 'center',
-                  alignItems: 'center',
-                  // textAlign: 'center',
-                  borderRadius: 5,
-                }}
-                dropDownContainerStyle={{
-                  borderColor: '#D3D3D3',
-                  backgroundColor: '#D3D3D3',
-                  height: 90,
-                  width: '95%',
-                }}
-                labelStyle={{
-                  textAlign: 'center',
-                }}
-              />
+    <TouchableWithoutFeedback onPress={() => {
+      setClarityOpen(false);
+      setColorOpen(false);
+      setShapeOpen(false);
+      setDiscountOpen(false);
+      setPurchaseOpen(false);
+      setCurrencyOpen(false);
+    }
+    }>
+      <SafeAreaView style={styles.main}>
+        <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
+          <View style={styles.head}>
+            <Image
+              source={require('../assets/navIcon/DiamondIcon.png')}
+              style={{
+                width: '8%',
+                height: '70%',
+                maxHeight: 40,
+                maxWidth: 40,
+                marginLeft: 80,
+                resizeMode: 'contain',
+                tintColor: '#fff',
+              }} />
+            <Text style={styles.headTitle}>{t('Calculator')}</Text>
+          </View>
 
-              <Text
-                style={{
-                  color: '#fff',
-                  marginBottom: -10,
-                  fontWeight: '600',
-                  fontSize: 15,
-                }}>
-                {t('Carat')}
-              </Text>
-              <TextInput //Carat
-                style={{
-                  height: 50,
-                  width: '95%',
-                  borderWidth: 1,
-                  marginTop: 2,
-                  padding: 10,
-                  backgroundColor: '#fff',
-                  borderColor: '#fff',
-                  borderRadius: 5,
-                  textAlign: 'center'
-                }}
-                onChangeText={onChangeText}
-                value={text}
-                placeholder="0.2ct"
-                keyboardType="decimal-pad"
-                maxLength={5}
-                returnKeyType={'done'}
-                keyboardAppearance={'default'}
-                autoCorrect={true}
+          <View style={styles.body}>
+            <View style={styles.scrollArea}>
+              <View style={{ width: '50%', justifyContent: 'space-evenly', justifyContent: 'space-evenly', }}>
+                <Text
+                  style={{
+                    color: '#fff',
+                    marginTop: '1%',
+                    marginBottom: 5,
+                    fontWeight: '600',
+                    fontSize: RFValue(12, 580),
+                  }}>
+                  {t('Color')}
+                </Text>
+                <DropDownPicker //Color
+                  selectedValue={coloritems}
+                  defaultValue={'E'}
+                  open={colorOpen}
+                  onOpen={onColorOpen}
+                  value={colorvalue}
+                  items={coloritems}
+                  setOpen={setColorOpen}
+                  setValue={setColorValue}
+                  setItems={setColorItems}
+                  zIndex={3000}
+                  zIndexInverse={1000}
+                  style={{
+                    borderColor: '#fff',
+                    // height: 50,
+                    width: '95%',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    // textAlign: 'center',
+                    borderRadius: 5,
+                  }}
+                  dropDownContainerStyle={{
+                    borderColor: '#D3D3D3',
+                    backgroundColor: '#D3D3D3',
+                    height: 90,
+                    width: '95%',
+                  }}
+                  labelStyle={{
+                    textAlign: 'center',
+                  }}
+                />
 
-              />
+                <Text
+                  style={{
+                    color: '#fff',
+                    marginTop: '1%',
+                    marginBottom: 5,
+                    fontWeight: '600',
+                    fontSize: RFValue(12, 580),
+                  }}>
+                  {t('Carat')}
+                </Text>
+                <TextInput //Carat
+                  style={{
+                    height: 50,
+                    width: '95%',
+                    borderWidth: 1,
+                    // marginTop: 2,
+                    padding: 10,
+                    backgroundColor: '#fff',
+                    borderColor: '#fff',
+                    borderRadius: 5,
+                    textAlign: 'center',
+                    color: '#000'
+                  }}
+                  onChangeText={onChangeText}
+                  value={text}
+                  placeholder="0.2ct"
+                  keyboardType="decimal-pad"
+                  maxLength={5}
+                  returnKeyType={'done'}
+                  keyboardAppearance={'default'}
+                  autoCorrect={true}
+
+                />
+              </View>
+
+              <View style={{ width: '50%', justifyContent: 'space-evenly', justifyContent: 'space-evenly', }}>
+                <Text
+                  style={{
+                    color: '#fff',
+                    marginTop: '1%',
+                    marginBottom: 5,
+                    fontWeight: '600',
+                    fontSize: RFValue(12, 580),
+                    marginLeft: '5%'
+                  }}>
+                  {t('Clarity')}
+                </Text>
+                <DropDownPicker //Clarity
+                  selectedValue={clarityitems}
+                  defaultValue={'FL'}
+                  open={clarityOpen}
+                  onOpen={onClarityOpen}
+                  setOpen={setClarityOpen}
+                  value={clarityvalue}
+                  items={clarityitems}
+                  setValue={setClarityValue}
+                  setItems={setClarityItems}
+                  zIndex={3000}
+                  zIndexInverse={1000}
+                  // onValueChange={(value, index) => setValue(value)}
+                  style={{
+                    borderColor: '#fff',
+                    height: 50,
+                    width: '95%',
+                    borderRadius: 5,
+                    marginLeft: '5%'
+                  }}
+                  dropDownContainerStyle={{
+                    borderColor: '#D3D3D3',
+                    backgroundColor: '#D3D3D3',
+                    height: 90,
+                    width: '95%',
+                    marginLeft: '5%'
+                  }}
+                  labelStyle={{
+                    textAlign: 'center',
+                  }}
+                />
+
+                <Text
+                  style={{
+                    color: '#fff',
+                    marginTop: '1%',
+                    marginBottom: 5,
+                    fontWeight: '600',
+                    fontSize: RFValue(12, 580),
+                    marginLeft: '5%'
+                  }}>
+                  {t('Shape')}
+                </Text>
+                <DropDownPicker //Shape
+                  selectedValue={shapeitems}
+                  defaultValue={'Round'}
+                  open={shapeOpen}
+                  onOpen={onShapeOpen}
+                  value={shapevalue}
+                  items={shapeitems}
+                  setOpen={setShapeOpen}
+                  setValue={setShapeValue}
+                  setItems={setShapeItems}
+                  zIndex={2000}
+                  zIndexInverse={2000}
+                  style={{
+                    borderColor: '#fff',
+                    height: 50,
+                    width: '95%',
+                    marginLeft: '5%',
+                    borderRadius: 5,
+                  }}
+                  dropDownContainerStyle={{
+                    borderColor: '#D3D3D3',
+                    backgroundColor: '#D3D3D3',
+                    width: '95%',
+                    marginLeft: '5%'
+                  }}
+                  labelStyle={{
+                    textAlign: 'center',
+                  }}
+                />
+              </View>
             </View>
 
-            <View style={{ width: '50%', justifyContent: 'space-evenly', }}>
+            <View
+              style={{
+                flexDirection: 'column',
+                height: '48%',
+                maxHeight: 250,
+                width: '90%',
+                justifyContent: 'space-evenly',
+                alignItems: 'flex-start',
+              }}>
               <Text
                 style={{
                   color: '#fff',
-                  marginBottom: -10,
+                  textAlign: 'left',
+                  marginTop: '1%',
+                  marginBottom: 5,
                   fontWeight: '600',
-                  fontSize: 15,
-                  marginLeft: '5%'
+                  fontSize: RFValue(12, 580),
                 }}>
-                {t('Clarity')}
+                {t('Discount')}
               </Text>
-              <DropDownPicker //Clarity
-                selectedValue={clarityitems}
-                defaultValue={'FL'}
-                open={clarityOpen}
-                onOpen={onClarityOpen}
-                setOpen={setClarityOpen}
-                value={clarityvalue}
-                items={clarityitems}
-                setValue={setClarityValue}
-                setItems={setClarityItems}
+              <DropDownPicker //discount
+                selectedValue={discountitems}
+                defaultValue={'30%'}
+                open={discountOpen}
+                onOpen={onDiscountOpen}
+                value={discountvalue}
+                items={discountitems}
+                setOpen={setDiscountOpen}
+                setValue={setDiscountValue}
+                setItems={setDiscountItems}
                 zIndex={3000}
                 zIndexInverse={1000}
                 // onValueChange={(value, index) => setValue(value)}
                 style={{
                   borderColor: '#fff',
                   height: 50,
-                  width: '95%',
+                  width: '100%',
+                  alignItems: 'center',
                   borderRadius: 5,
-                  marginLeft: '5%'
+                  // marginVertical: 5,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
                   height: 90,
-                  width: '95%',
-                  marginLeft: '5%'
                 }}
                 labelStyle={{
                   textAlign: 'center',
                 }}
               />
-
               <Text
                 style={{
                   color: '#fff',
-                  marginBottom: -10,
+                  textAlign: 'left',
+                  marginTop: '1%',
+                  marginBottom: 5,
                   fontWeight: '600',
-                  fontSize: 15,
-                  marginLeft: '5%'
+                  fontSize: RFValue(12, 580),
                 }}>
-                {t('Shape')}
+                {t('PurchasePrice')}
               </Text>
-              <DropDownPicker //Shape
-                selectedValue={shapeitems}
-                defaultValue={'Round'}
-                open={shapeOpen}
-                onOpen={onShapeOpen}
-                value={shapevalue}
-                items={shapeitems}
-                setOpen={setShapeOpen}
-                setValue={setShapeValue}
-                setItems={setShapeItems}
+              <DropDownPicker //purchase price
+                selectedValue={purchaseitems}
+                defaultValue={'30% - Min Price'}
+                open={purchaseOpen}
+                onOpen={onPurchaseOpen}
+                value={purchasevalue}
+                items={purchaseitems}
+                setOpen={setPurchaseOpen}
+                setValue={setPurchaseValue}
+                setItems={setPurchaseItems}
                 zIndex={2000}
                 zIndexInverse={2000}
+                // onValueChange={(value, index) => setValue(value)}
                 style={{
                   borderColor: '#fff',
                   height: 50,
-                  width: '95%',
-                  marginLeft: '5%',
+                  width: '100%',
+                  alignItems: 'center',
                   borderRadius: 5,
+                  // marginVertical: 5,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
-                  width: '95%',
-                  marginLeft: '5%'
+                  height: 90,
                 }}
-                labelStyle={{
-                  textAlign: 'center',
-                }}
-              />
-            </View>
-          </View>
-
-          <View
-            style={{
-              flexDirection: 'column',
-              // height: '40%',
-              height: 270,
-              width: '90%',
-              justifyContent: 'space-between',
-              // backgroundColor: 'blue',
-            }}>
-            <Text
-              style={{
-                color: '#fff',
-                textAlign: 'left',
-                marginBottom: -10,
-                fontWeight: '600',
-              }}>
-              {t('Discount')}
-            </Text>
-            <DropDownPicker //discount
-              selectedValue={discountitems}
-              defaultValue={'30%'}
-              open={discountOpen}
-              onOpen={onDiscountOpen}
-              value={discountvalue}
-              items={discountitems}
-              setOpen={setDiscountOpen}
-              setValue={setDiscountValue}
-              setItems={setDiscountItems}
-              zIndex={3000}
-              zIndexInverse={1000}
-              // onValueChange={(value, index) => setValue(value)}
-              style={{
-                borderColor: '#fff',
-                height: 50,
-                width: '100%',
-                alignItems: 'center',
-                marginVertical: 5,
-                textAlign: 'center',
-              }}
-              dropDownContainerStyle={{
-                borderColor: '#D3D3D3',
-                backgroundColor: '#D3D3D3',
-                height: 150,
-              }}
-              labelStyle={{
-                textAlign: 'center',
-              }}
-            />
-            <Text
-              style={{
-                color: '#fff',
-                textAlign: 'left',
-                marginBottom: -10,
-                fontWeight: '600',
-              }}>
-              {t('PurchasePrice')}
-            </Text>
-            <DropDownPicker //purchase price
-              selectedValue={purchaseitems}
-              defaultValue={'30% - Min Price'}
-              open={purchaseOpen}
-              onOpen={onPurchaseOpen}
-              value={purchasevalue}
-              items={purchaseitems}
-              setOpen={setPurchaseOpen}
-              setValue={setPurchaseValue}
-              setItems={setPurchaseItems}
-              zIndex={2000}
-              zIndexInverse={2000}
-              // onValueChange={(value, index) => setValue(value)}
-              style={{
-                borderColor: '#fff',
-                height: 50,
-                width: '100%',
-                alignItems: 'center',
-                marginVertical: 5,
-              }}
-              dropDownContainerStyle={{
-                borderColor: '#D3D3D3',
-                backgroundColor: '#D3D3D3',
-                height: 90,
-              }}
-              labelStyle={
-                {
-                  textAlign: 'center',
+                labelStyle={
+                  {
+                    textAlign: 'center',
+                  }
                 }
-              }
-            />
+              />
+
+              <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', height: -1, }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    width: '100%',
+                    height: -1,
+                    justifyContent: 'space-between',
+                    marginTop: '1%',
+                    alignItems: 'center',
+
+                  }}>
+                  <View
+                    style={{
+                      marginTop: '3%',
+                      width: '49%',
+                      height: '90%',
+                      maxHeight: 50,
+                      backgroundColor: 'blue',
+                      justifyContent: 'center',
+                      borderRadius: 5,
+                    }}>
+                    <TouchableOpacity
+                      style={{
+                        alignItems: 'center', justifyContent: 'center'
+                      }}
+                      onPress={calcPrice}>
+                      <Text
+                        style={{
+                          color: '#fff',
+                          textAlign: 'center',
+                          fontWeight: '600',
+                          fontSize: RFValue(12, 580),
+                        }}>
+                        {t('Calculate')}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View
+                    style={{
+                      marginTop: '3%',
+                      width: '49%',
+                      height: '90%',
+                      maxHeight: 50,
+                      borderWidth: 1,
+                      borderColor: '#fff',
+                      justifyContent: 'center',
+                      borderRadius: 5,
+                      backgroundColor: '#fffff00',
+                    }}>
+                    <TouchableOpacity
+                      style={{ alignItems: 'center', height: '100%', justifyContent: 'center' }}
+                      onPress={reset}>
+                      <Text style={{ color: '#fff', fontWeight: '600', fontSize: RFValue(12, 580), }}>
+                        {t('Reset')}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </View>
 
             <View style={{
-              //  backgroundColor: 'red' 
+              height: -1,
             }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  // display: 'flex',
-                  width: '100%',
-                  justifyContent: 'space-between',
-                  marginVertical: 10,
-                  alignItems: 'center',
-                  // backgroundColor: 'blue',
-                }}>
+              <Text style={styles.resultNote}>{t('Diamond_price')}</Text>
+              <View style={styles.priceListMain}>
                 <View
                   style={{
-                    width: '49%',
-                    height: 50,
-                    backgroundColor: 'blue',
-                    justifyContent: 'center',
-                    borderRadius: 5,
+                    width: '38%',
+                    height: '50%',
+                    maxHeight: 60,
+                    justifyContent: 'flex-start',
+                    alignItems: 'flex-start',
                   }}>
-                  <TouchableOpacity
+
+                  <DropDownPicker //currency
+                    selectedValue={currencyitems}
+                    defaultValue={'USD'}
+                    open={currencyOpen}
+                    onOpen={onCurrencyOpen}
+                    value={currencyvalue}
+                    items={currencyitems}
+                    setOpen={setCurrencyOpen}
+                    setValue={setCurrencyValue}
+                    setItems={setCurrencyItems}
+                    zIndex={1000}
+                    onChangeValue={onValueChange}
                     style={{
-                      alignItems: 'center', height: '100%', justifyContent: 'center'
+                      borderColor: '#fff',
+                      height: 50,
+                      width: '100%',
+                      alignItems: 'center',
+                      borderBottomRightRadius: 0,
+                      borderTopRightRadius: 0,
+                      borderRadius: 5,
                     }}
-                    onPress={calcPrice}>
-                    <Text
-                      style={{
-                        color: '#fff',
-                        textAlign: 'center',
-                        fontWeight: '600',
-                      }}>
-                      {t('Calculate')}
-                    </Text>
-                  </TouchableOpacity>
+                    dropDownContainerStyle={{
+                      borderColor: '#D3D3D3',
+                      height: 120,
+                    }}
+                    controller={(instance) => dropDownRef.current = instance}
+                  />
                 </View>
                 <View
                   style={{
-                    width: '49%',
+                    width: '60%',
                     height: 50,
-                    borderWidth: 1,
-                    borderColor: '#fff',
-                    justifyContent: 'center',
                     borderRadius: 5,
-                    backgroundColor: '#fffff00',
-                  }}>
-                  <TouchableOpacity
-                    style={{ alignItems: 'center', height: '100%', justifyContent: 'center' }}
-                    onPress={reset}>
-                    <Text style={{ color: '#fff', fontWeight: '600' }}>
-                      {t('Reset')}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View style={{
-            marginVertical: '5%',
-            height: 150,
-            // backgroundColor: 'orange' 
-          }}>
-            <Text style={styles.resultNote}>{t('Diamond_price')}</Text>
-            <View style={styles.priceListMain}>
-              <View
-                style={{
-                  width: '38%',
-                  height: 150,
-                  justifyContent: 'flex-start',
-                  alignItems: 'flex-start',
-                }}>
-
-                <DropDownPicker //currency
-                  selectedValue={currencyitems}
-                  defaultValue={'USD'}
-                  open={currencyOpen}
-                  onOpen={onCurrencyOpen}
-                  value={currencyvalue}
-                  items={currencyitems}
-                  setOpen={setCurrencyOpen}
-                  setValue={setCurrencyValue}
-                  setItems={setCurrencyItems}
-                  zIndex={1000}
-                  onChangeValue={onValueChange}
-                  style={{
-                    borderColor: '#fff',
-                    height: 50,
-                    width: '100%',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    borderBottomRightRadius: 0,
-                    borderTopRightRadius: 0,
-                  }}
-                  dropDownContainerStyle={{
-                    borderColor: '#D3D3D3',
-                    height: 120,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  width: '60%',
-                  height: 50,
-                  borderRadius: 5,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#fff',
-                  borderLeftWidth: 1,
-                  borderTopLeftRadius: 0,
-                  borderBottomLeftRadius: 0,
-                  borderLeftColor: '#808080',
-                }}>
-                <Text style={styles.scrollAreaTitle2}>{finalPrice}</Text>
-                {/* <Text style={styles.scrollAreaTitle2}>{currencySymbol}{finalPrice}</Text> */}
-              </View>
+                    backgroundColor: '#fff',
+                    borderLeftWidth: 1,
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                    borderLeftColor: '#808080',
+                  }}>
+                  <Text style={styles.scrollAreaTitle2}>{finalPrice}</Text>
+                  {/* <Text style={styles.scrollAreaTitle2}>{currencySymbol}{finalPrice}</Text> */}
+                </View>
 
+              </View>
             </View>
           </View>
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
+
+        </ImageBackground>
+      </SafeAreaView >
+    </TouchableWithoutFeedback >
   );
 }
 
@@ -2667,13 +2696,15 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
+    // justifyContent: 'center',
+    // width: '100%',
+    // height: '100%',
   },
   head: {
+    flex: 1,
     width: '100%',
     height: '8%',
+    maxHeight: 60,
     borderBottomColor: '#fff',
     borderBottomWidth: 2,
     flexDirection: 'row',
@@ -2695,14 +2726,14 @@ const styles = StyleSheet.create({
     // backgroundColor: 'purple'
   },
   scrollArea: {
-    // height: '35%',
-    height: 200,
+    height: '35%',
+    maxHeight: 200,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     width: '90%',
   },
   dropdownarea: {
-    borderRadius: 10,
+    borderRadius: 5,
     borderWidth: 1,
     backgroundColor: '#fff',
     borderColor: '#fff',
@@ -2710,18 +2741,17 @@ const styles = StyleSheet.create({
   resultNote: {
     width: '90%',
     color: '#fff',
-    marginTop: 10,
-    marginBottom: 10,
-
+    marginTop: '1%',
+    marginBottom: 5,
+    fontSize: RFValue(12, 580),
     fontWeight: '600',
   },
   scrollAreaTitle2: {
     color: '#000',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: RFValue(12, 580),
     paddingVertical: 15,
     width: 200,
-    // backgroundColor: 'green'
   },
   priceListMain: {
     flexDirection: 'row',
@@ -2732,6 +2762,5 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     borderRadius: 5,
     marginBottom: 10,
-    // backgroundColor: 'magenta'
   },
 });

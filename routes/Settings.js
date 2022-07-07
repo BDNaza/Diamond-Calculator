@@ -1,13 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, Image, Linking, Modal, Pressable, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, Image, Linking, Modal, Pressable, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import i18n from '../languages/i18n'
 import DropDownPicker from 'react-native-dropdown-picker';
 import LanguageDropdown from '../function/languageDropdown';
 import { Translation } from 'react-i18next';
-
-
-const bgimg = { uri: 'https://www.crane-a.co.jp/en/wp-content/themes/lotus_tcd039a/img/diamondapp/mobile/main-bg.jpg' };
 
 export default function SettingsScreen({ navigation }) {
     const { t, i18n } = useTranslation();
@@ -27,136 +24,154 @@ export default function SettingsScreen({ navigation }) {
         setValue('en')
     }
     return (
-        <SafeAreaView style={styles.main} >
-            <ImageBackground source={bgimg} resizeMode="cover" style={styles.background}>
-                <View style={styles.head}>
-                    <Image
-                        source={require('../assets/navIcon/DiamondIcon.png')}
-                        style={{
-                            width: 30,
-                            height: 30,
-                            marginLeft: 80,
-                            resizeMode: 'contain',
-                            tintColor: '#fff',
-                        }} />
-                    <Text style={styles.headTitle}>{t("Settings")}</Text>
-                </View>
-                <View style={styles.body}>
-                    <View style={{ width: '100%', height: 80, justifyContent: 'space-between', borderBottomWidth: 1, borderColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Price-update")}</Text>
-                        <View style={{ zIndex: 0, elevation: 0, width: 150, paddingRight: 0, }}>
-                            <Text style={{ color: '#fff', paddingHorizontal: 10, fontWeight: '600' }}>{t("Price-update-date")}</Text>
-                        </View>
+        <TouchableWithoutFeedback onPress={() => setOpen(false)}>
+            <SafeAreaView style={styles.main} >
+                <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
+                    <View style={styles.head}>
+                        <Image
+                            source={require('../assets/navIcon/DiamondIcon.png')}
+                            style={{
+                                width: '8%',
+                                height: '70%',
+                                maxHeight: 40,
+                                maxWidth: 40,
+                                marginLeft: 80,
+                                resizeMode: 'contain',
+                                tintColor: '#fff',
+                            }} />
+                        <Text style={styles.headTitle}>{t("Settings")}</Text>
                     </View>
-
-                    <View style={{ width: '100%', height: 80, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 10, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Language")}</Text>
-                        <View style={{ zIndex: 0, elevation: 0, width: '34%', paddingRight: 10 }}>
-                            <DropDownPicker
-                                open={open}
-                                value={value}
-                                items={items}
-                                setOpen={setOpen}
-                                setValue={setValue}
-                                setItems={setItems}
-                                onChangeValue={(value) => {
-                                    i18n.changeLanguage(value)
-                                }}
-                                style={{
-                                    backgroundColor: "transparent",
-                                    border: 0,
-
-                                }}
-                                containerStyle={{
-                                    // backgroundColor: '#000',
-                                    borderRadius: 10,
-                                }}
-                                textStyle={{
-                                    color: '#000'
-                                }}
-                                labelStyle={{
-                                    backgroundColor: 'transparent',
-                                    color: '#fff',
-                                }}
-
-                            />
-                        </View>
-                    </View>
-                    <View style={{ width: '100%', height: 80, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, }}>
-                        <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Share_App")}</Text>
-                        <View></View>
-                    </View>
-                    <TouchableOpacity
-                        style={{ alignItems: "center", width: '100%', }}
-                        onPress={() => {
-                            Linking.openURL('mailto:info@crane-a.co.jp?subject=Diamond Apps Inquiry&body=Inquiry details:')
-                        }}>
-                        <View style={{ width: '100%', height: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Contact_Author")}</Text>
-                            <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
-                                <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
+                    <View style={styles.body}>
+                        <View style={{ width: '100%', height: '13%', maxHeight: 80, justifyContent: 'space-between', borderBottomWidth: 1, borderColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Price-update")}</Text>
+                            <View style={{ zIndex: 0, elevation: 0, width: 150, paddingRight: 0, }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 10, fontWeight: '600' }}>{t("Price-update-date")}</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-                    <Pressable
-                        style={{ width: '100%', }}
-                        onPress={() => setModalVisible(true)}
-                    >
-                        <View style={{ width: '100%', height: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Terms_and_conditions")}</Text>
-                            <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
-                                <Modal
-                                    animationType="slide"
-                                    transparent={true}
-                                    visible={modalVisible}
-                                    onRequestClose={() => {
-                                        Alert.alert("Modal has been closed.");
-                                        setModalVisible(!modalVisible);
+                        <View style={{ width: '100%', height: '13%', maxHeight: 80, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 10, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Language")}</Text>
+                            <View style={{ zIndex: 0, elevation: 0, width: '34%', paddingRight: 10 }}>
+                                <DropDownPicker
+                                    open={open}
+                                    value={value}
+                                    items={items}
+                                    setOpen={setOpen}
+                                    setValue={setValue}
+                                    setItems={setItems}
+                                    onChangeValue={(value) => {
+                                        i18n.changeLanguage(value)
                                     }}
-                                >
-                                    <View style={styles.centeredView}>
-                                        <View style={styles.modalView}>
-                                            <Text style={styles.modalTextTitle}>
-                                                {t("Terms_and_conditions")}
-                                            </Text>
-                                            <Text style={{ marginTop: '10%' }}>
-                                                {t("TNC_description")}
-                                            </Text>
-                                            <Pressable
-                                                style={[styles.buttonModalClose]}
-                                                onPress={() => setModalVisible(!modalVisible)}
-                                            >
-                                                <Text style={styles.Textmodalclose}>Close</Text>
-
-                                            </Pressable>
-                                        </View>
-                                    </View>
-                                </Modal>
-                                <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                        borderColor: '#FFF',
+                                    }}
+                                    containerStyle={{
+                                        borderColor: '#fff',
+                                        borderRadius: 10,
+                                    }}
+                                    textStyle={{
+                                        color: '#000',
+                                        borderColor: '#fff',
+                                    }}
+                                    labelStyle={{
+                                        borderColor: '#fff',
+                                        backgroundColor: 'transparent',
+                                        color: '#fff',
+                                    }}
+                                    dropDownContainerStyle={{
+                                        borderColor: '#D3D3D3',
+                                        backgroundColor: '#D3D3D3',
+                                        width: '100%',
+                                    }}
+                                />
                             </View>
                         </View>
-
-                    </Pressable>
-                    <View style={styles.button}>
                         <TouchableOpacity
-                            style={{ alignItems: 'center', color: '#FFF', height: '100%', justifyContent: 'center' }}
-                            onPress={reset}
-                        >
-                            <Text style={{ color: '#fff', fontWeight: '600' }}>
-                                {t("Reset")}
-                            </Text>
+                            style={{ alignItems: "center", width: '100%', height: '13%', maxHeight: 80, }}
+                            onPress={() => {
+                                Linking.openURL('https://play.google.com/store/apps/details?id=com.diamondcrane')
+                            }}>
+                            <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Share_App")}</Text>
+                                <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
+                                    <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
+                                </View>
+                            </View>
                         </TouchableOpacity>
-                    </View>
+                        <TouchableOpacity
+                            style={{ alignItems: "center", width: '100%', height: '13%', maxHeight: 80, }}
+                            onPress={() => {
+                                Linking.openURL('mailto:developer@crane-a.co.jp?subject=Diamond Apps Inquiry&body=Inquiry details:')
+                            }}>
+                            <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Contact_Author")}</Text>
+                                <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
+                                    <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                        <Pressable
+                            style={{ width: '100%', height: '13%', maxHeight: 80, }}
+                            onPress={() => {
+                                setModalVisible(true)
+                                setOpen(false)
+                            }}
+                        >
+                            <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Terms_and_conditions")}</Text>
+                                <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
+                                    <Modal
+                                        animationType="slide"
+                                        transparent={true}
+                                        visible={modalVisible}
+                                        onRequestClose={() => {
+                                            Alert.alert("Modal has been closed.");
+                                            setModalVisible(!modalVisible);
+                                        }}
+                                    >
+                                        <View style={styles.centeredView}>
+                                            <View style={styles.modalView}>
+                                                <Text style={styles.modalTextTitle}>
+                                                    {t("Terms_and_conditions")}
+                                                </Text>
+                                                <Text style={{ marginTop: '10%', color: '#808080' }}>
+                                                    {t("TNC_description")}
+                                                </Text>
+                                                <Pressable
+                                                    style={[styles.buttonModalClose]}
+                                                    onPress={() => setModalVisible(!modalVisible)}
+                                                >
+                                                    <Text style={styles.Textmodalclose}>Close</Text>
 
-                    <View style={{ height: '25%', justifyContent: 'flex-end' }}>
-                        <Text style={{ color: '#fff' }}>
-                            {/* V1.6.66 */}
-                        </Text>
-                    </View>
+                                                </Pressable>
+                                            </View>
+                                        </View>
+                                    </Modal>
+                                    <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
+                                </View>
+                            </View>
 
-                </View>
-            </ImageBackground >
-        </SafeAreaView >
+                        </Pressable>
+                        <View style={styles.button}>
+                            <TouchableOpacity
+                                style={{ alignItems: 'center', color: '#FFF', height: '100%', justifyContent: 'center' }}
+                                onPress={reset}
+                            >
+                                <Text style={{ color: '#fff', fontWeight: '600' }}>
+                                    {t("Reset")}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ height: '25%', width: '100%', justifyContent: 'flex-end', alignItems: 'center', }}>
+                            <Text style={{ color: '#fff', justifyContent: 'center', }}>
+                                V1.0
+                            </Text>
+                        </View>
+
+                    </View>
+                </ImageBackground >
+            </SafeAreaView >
+        </TouchableWithoutFeedback >
     );
 }
 const styles = StyleSheet.create({
@@ -171,8 +186,10 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     head: {
+        flex: 1,
         width: '100%',
         height: '8%',
+        maxHeight: 60,
         borderBottomColor: '#fff',
         borderBottomWidth: 2,
         flexDirection: 'row',
@@ -187,9 +204,9 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     body: {
-        // flex: 1,
-        justifyContent: 'center',
+        flex: 1,
         alignItems: 'flex-start',
+
     },
     button: {
         width: '80%',
@@ -241,6 +258,7 @@ const styles = StyleSheet.create({
     modalTextTitle: {
         textDecorationLine: 'underline',
         fontSize: 16,
+        color: '#808080'
     },
     centeredView: {
         height: '100%',

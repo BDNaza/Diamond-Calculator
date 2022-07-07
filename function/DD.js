@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Dimensions, StyleSheet, useState, useEffect } from 'react-native';
+import { View, Dimensions, StyleSheet, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import DynamicallySelectedPicker from 'react-native-dynamically-selected-picker';
+import DynamicallySelectedPicker from "react-native-dynamically-selected-picker";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 // import AsyncStorage from '@react-native-community/async-storage';
+import SoundPlayer from 'react-native-sound-player'
 
 export default class Example extends React.Component {
 
@@ -12,8 +14,28 @@ export default class Example extends React.Component {
       checking: false
     };
     this.filterPrice = this.filterPrice.bind(this);
+
   }
 
+  playSong() {
+    try {
+      SoundPlayer.playSoundFile('tick', 'wav');
+      SoundPlayer.setVolume(0.1);
+    } catch (e) {
+      alert('Cannot play the files')
+      console.log('cannot play the song file', e)
+    }
+  }
+
+
+  async getInfo() { // You need the keyword `async`
+    try {
+      const info = await SoundPlayer.getInfo() // Also, you need to await this because it is async
+      console.log('getInfo', info) // {duration: 12.416, currentTime: 7.691}
+    } catch (e) {
+      console.log('There is no song playing', e)
+    }
+  }
 
   filterPrice() {
     // const [data, setData] = useState([]);
@@ -49,8 +71,12 @@ export default class Example extends React.Component {
 
   render() {
     const windowWidth = Dimensions.get('window').width;
+    const options = {
+      enableVibrateFallback: true,
+      ignoreAndroidSystemSettings: true
+    };
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, }}>
         <View>
           <DynamicallySelectedPicker
             items={[
@@ -60,16 +86,19 @@ export default class Example extends React.Component {
               },
             ]}
             onScroll={({ index, item }) => {
+              ReactNativeHapticFeedback.trigger("notificationError", options);
+              this.playSong();
               this.props.updateSelectedShape(index + 1);
               // console.log(index + 1 + 'shape')
             }}
-            height={210}
+            height={200}
             width={70}
             initialSelectedIndex={1}
             backgroundColor={'#fffff'}
             selectedItemBorderColor={'#005fe9'}
             selectedItemBorderWidth={1}
             fontSize={13}
+
           />
         </View>
         <View>
@@ -121,17 +150,19 @@ export default class Example extends React.Component {
               },
             ]}
             onScroll={({ index, item }) => {
+              ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedColor(index + 1);
-
+              this.playSong();
               // console.log(index + 1, 'Color')
             }}
-            height={210}
+            height={200}
             width={60}
             initialSelectedIndex={1}
             backgroundColor={'#fffff00'}
             selectedItemBorderColor={'#005fe9'}
             selectedItemBorderWidth={3}
             fontSize={13}
+
           />
         </View>
         <View>
@@ -183,10 +214,12 @@ export default class Example extends React.Component {
               },
             ]}
             onScroll={({ index, item }) => {
+              ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedClarity(index + 1);
+              this.playSong();
               // console.log(index + 1 + 'Clarity')
             }}
-            height={210}
+            height={200}
             width={60}
             initialSelectedIndex={1}
             backgroundColor={'#fffff00'}
@@ -218,10 +251,13 @@ export default class Example extends React.Component {
               { label: '10.00 - 10.99', value: '18' }
             ]}
             onScroll={({ index, item }) => {
+              ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedCarat(index + 1);
+              this.playSong();
+              this.getInfo();
               // console.log(index + 1 + 'Carat')
             }}
-            height={210}
+            height={200}
             width={80}
             initialSelectedIndex={1}
             backgroundColor={'#fffff00'}

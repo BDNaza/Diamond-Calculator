@@ -1,15 +1,15 @@
 import * as react from 'react';
 import React, { useState, useEffect, Component, Dimensions } from 'react';
-import { Text, View, StyleSheet, Button, ImageBackground, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Appearance, ImageBackground, Image, SafeAreaView, TouchableOpacity, } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import DynamicallySelectedPicker from '../function/DD'
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import DynamicallySelectedPicker from '../function/DD';
 
 
-const bgimg = { uri: 'https://www.crane-a.co.jp/en/wp-content/themes/lotus_tcd039a/img/diamondapp/mobile/main-bg.jpg' };
 
 export default function HomeScreen({ navigation }) {
     const { t, i18n } = useTranslation();
-
+    const ONE_SECOND_IN_MS = 1;
     const [stateSelectedPicker, setStateSelectedPicker] = useState({
         selectedColorIndex: 1,
         selectedClarityIndex: 1,
@@ -39,11 +39,6 @@ export default function HomeScreen({ navigation }) {
     const carat = stateSelectedPicker.selectedCaratIndex
 
     const getPrice = () => {
-
-        { console.log('zzzzz Home', color) }
-        { console.log('Test Clarity Home', clarity) }
-        { console.log('Test Carat Home', carat) }
-
         fetch('https://www.jewel-cafe-staff.com/api/showPrice', {
             method: "GET",
             headers: {
@@ -63,7 +58,6 @@ export default function HomeScreen({ navigation }) {
                 const diamondPrice = JSON.stringify(filtered[0].price)
                 setData(diamondPrice.replace(/\"/g, ""));
                 setSymbol('$')
-                console.log("Filtered Data Price: ", data);
             })
             .catch((error) => {
                 console.error(error);
@@ -83,13 +77,15 @@ export default function HomeScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.main} >
-            <ImageBackground source={bgimg} resizeMode="cover" style={styles.background}>
+            <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
                 <View style={styles.head}>
                     <Image
                         source={require('../assets/navIcon/DiamondIcon.png')}
                         style={{
-                            width: 30,
-                            height: 30,
+                            width: '8%',
+                            height: '70%',
+                            maxHeight: 40,
+                            maxWidth: 40,
                             marginLeft: 80,
                             resizeMode: 'contain',
                             tintColor: '#fff',
@@ -99,15 +95,14 @@ export default function HomeScreen({ navigation }) {
                         {t("Price")}
                     </Text>
                 </View>
-
                 <View style={styles.body}>
                     <Text style={styles.bodyTitle}>{t("Price-update")}{'\n'}{t("Price-update-date")}</Text>
                     <View style={styles.scrollArea}>
                         <View style={styles.pickertitle}>
-                            <Text style={styles.scrollAreaTitle}>{t("Shape")}</Text>
-                            <Text style={styles.scrollAreaTitle}>{t("Color")}</Text>
-                            <Text style={styles.scrollAreaTitle}>{t("Clarity")}</Text>
-                            <Text style={styles.scrollAreaTitle}>{t("Carat")}</Text>
+                            <Text style={styles.scrollAreaShapeTitle}>{t("Shape")}</Text>
+                            <Text style={styles.scrollAreaColorTitle}>{t("Color")}</Text>
+                            <Text style={styles.scrollAreaClarityTitle}>{t("Clarity")}</Text>
+                            <Text style={styles.scrollAreaCaratTitle}>{t("Carat")}</Text>
                         </View>
                         <View>
                             <DynamicallySelectedPicker
@@ -124,17 +119,14 @@ export default function HomeScreen({ navigation }) {
                             style={{ alignItems: 'center', color: '#FFF', height: '100%', justifyContent: 'center' }}
                             onPress={getPrice}
                         >
-                            <Text style={styles.buttonText}>{t("Calculate")}
-                            </Text>
+                            <Text style={styles.buttonText}>{t("Calculate")}</Text>
                         </TouchableOpacity>
-                        {/* <button onClick={getPrice}></button> */}
                     </View>
                     <Text style={styles.resultNote}>
                         {t("Diamond_price")} {"\n"}
                         {t("Diamond_price/carat")}
                     </Text>
                     <View style={styles.priceListMain}>
-
                         <View
                             style={{
                                 width: "40%",
@@ -165,12 +157,7 @@ export default function HomeScreen({ navigation }) {
         </SafeAreaView >
 
     );
-
 }
-
-
-
-
 const styles = StyleSheet.create({
     main: {
         flex: 1,
@@ -184,11 +171,11 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     head: {
-        // flex: 0.12,
+        flex: 1,
         width: '100%',
         height: '8%',
+        maxHeight: 60,
         borderBottomColor: '#fff',
-        // paddingBottom: 10,
         borderBottomWidth: 2,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -198,32 +185,31 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'left',
         paddingLeft: 5,
-        fontSize: 30,
-        // position: 'absolute',
+        fontSize: RFValue(22, 580),
         width: '100%',
-        // height: 40,
-        // backgroundColor: 'red',
 
     },
     body: {
-        flex: 0.9,
-        justifyContent: 'center',
+        flex: 10,//new flex
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     bodyTitle: {
         color: '#fff',
-        fontSize: 25,
+        fontSize: RFValue(20, 580),
         width: '70%',
         textAlign: 'center',
-        paddingVertical: 10,
+        marginTop: '2%',
+        marginBottom: '1%',
     },
     scrollArea: {
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        alignContent: 'flex-start',
+        alignContent: 'center',
         width: '90%',
-        height: 280,
-        borderRadius: 10,
+        height: '50%',
+        maxHeight: 270,
+        borderRadius: 5,
         borderWidth: 1,
         backgroundColor: '#fff',
         borderColor: '#fff',
@@ -320,60 +306,82 @@ const styles = StyleSheet.create({
         marginTop: 80,
     },
 
-    scrollAreaTitle: {
+    scrollAreaShapeTitle: {
         color: '#000',
         textAlign: 'center',
         justifyContent: 'center',
-        fontSize: 15,
-        paddingVertical: 15,
-        width: '22%',
+        fontSize: RFValue(12, 580),
+        width: 70,
         fontFamily: 'Open Sans Light',
-        // fontWeight:'600'
-        // backgroundColor: 'green',
+        zIndex: 2,
+    },
+    scrollAreaColorTitle: {
+        color: '#000',
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontSize: RFValue(12, 580),
+        width: 60,
+        fontFamily: 'Open Sans Light',
+        zIndex: 2,
+    },
+    scrollAreaClarityTitle: {
+        color: '#000',
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontSize: RFValue(12, 580),
+        width: 60,
+        fontFamily: 'Open Sans Light',
+        zIndex: 2,
+    },
+    scrollAreaCaratTitle: {
+        color: '#000',
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontSize: RFValue(12, 580),
+        width: 80,
+        fontFamily: 'Open Sans Light',
+        zIndex: 2,
     },
     scrollAreaTitle2: {
         color: '#000',
         textAlign: 'center',
-        fontSize: 15,
-        paddingVertical: 15,
+        fontSize: RFValue(12, 580),
         width: '40%',
     },
     scrollAreaTitle3: {
         color: '#000',
         textAlign: 'center',
-        fontSize: 15,
-        // paddingVertical: 15,
-        // width: '80%',
+        fontSize: RFValue(15, 580),
 
     },
     button: {
         width: '90%',
-        height: 50,
-        marginTop: 20,
+        height: '9%',
+        maxHeight: 60,
+        marginTop: '4%',
         backgroundColor: 'blue',
-        borderRadius: 10,
+        borderRadius: 5,
         justifyContent: 'center',
     },
     buttonText: {
         color: '#fff',
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: RFValue(14, 580),
     },
     resultNote: {
         width: '90%',
         color: '#fff',
-        marginTop: 10,
-        marginBottom: 10,
-        // fontFamily:'opensans',
+        marginVertical: '2%',
         fontWeight: '600',
-        fontSize: 15
+        fontSize: RFValue(12, 580),
     },
     priceListMain: {
         flexDirection: 'row',
         width: '90%',
-        height: 50,
+        height: '10%',
+        maxHeight: 60,
         backgroundColor: '#fff',
-        borderRadius: 10,
+        borderRadius: 5,
         marginBottom: 10,
     },
     pickerItems: {
@@ -395,7 +403,8 @@ const styles = StyleSheet.create({
     pickertitle: {
         display: 'flex',
         flexDirection: 'row',
-        // backgroundColor: 'red',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
+        marginTop: 5,
+        paddingHorizontal: 10
     }
 });
