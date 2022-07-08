@@ -3,7 +3,6 @@ import { View, Dimensions, StyleSheet, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import DynamicallySelectedPicker from "react-native-dynamically-selected-picker";
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
-// import AsyncStorage from '@react-native-community/async-storage';
 import SoundPlayer from 'react-native-sound-player'
 
 export default class Example extends React.Component {
@@ -27,47 +26,7 @@ export default class Example extends React.Component {
     }
   }
 
-
-  async getInfo() { // You need the keyword `async`
-    try {
-      const info = await SoundPlayer.getInfo() // Also, you need to await this because it is async
-      console.log('getInfo', info) // {duration: 12.416, currentTime: 7.691}
-    } catch (e) {
-      console.log('There is no song playing', e)
-    }
-  }
-
-  filterPrice() {
-    // const [data, setData] = useState([]);
-
-    // return fetch("https://www.jewel-cafe-staff.com/api/showPrice", {
-    //   method: "GET",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-
-    // console.log(responseJson);
-    // const filtered = responseJson.filter(
-    //   (item) =>
-    //     item.id_shape === "1" &&
-    //     item.id_color === this.state.selectedColorIndex &&
-    //     item.id_clarity === this.state.selectedClarityIndex &&
-    //     item.id_carat === this.state.selectedCaratIndex
-    // );
-    // console.log("Filtered Data Price: ", filtered[0].price);
-    // })
-
-    // { console.log('Hello') }
-    // sekarang sume ni kau dapat dr props
-    // { console.log('Test Shape', this.props.selectedShapeIndex) }
-    // { console.log('Test Color', this.props.selectedColorIndex) }
-    // { console.log('Test Clarity', this.props.selectedClarityIndex) }
-    // { console.log('Test Carat', this.props.selectedCaratIndex) }
-  }
+  filterPrice() { }
 
   render() {
     const windowWidth = Dimensions.get('window').width;
@@ -76,7 +35,7 @@ export default class Example extends React.Component {
       ignoreAndroidSystemSettings: true
     };
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', paddingHorizontal: 10, }}>
         <View>
           <DynamicallySelectedPicker
             items={[
@@ -254,7 +213,7 @@ export default class Example extends React.Component {
               ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedCarat(index + 1);
               this.playSong();
-              this.getInfo();
+
               // console.log(index + 1 + 'Carat')
             }}
             height={200}

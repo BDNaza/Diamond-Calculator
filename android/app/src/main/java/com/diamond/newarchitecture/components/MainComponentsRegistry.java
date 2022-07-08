@@ -1,4 +1,4 @@
-package com.diamondcrane.newarchitecture.components;
+package com.fccalculator.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

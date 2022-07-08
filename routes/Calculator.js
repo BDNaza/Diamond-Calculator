@@ -8,16 +8,18 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Keyboard
 } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useTranslation } from 'react-i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
-// import CurrencyDropdown from '../function/currencyDropdown';
 
 export default function CalculatorScreen({ navigation }) {
   const { t, i18n } = useTranslation();
   const dropDownRef = React.useRef();
+
+  //function to close cropdown while open another dropdown
   const onColorOpen = useCallback(() => {
     setClarityOpen(false);
     setShapeOpen(false);
@@ -78,7 +80,7 @@ export default function CalculatorScreen({ navigation }) {
     { label: 'M', value: '10' },
     { label: 'N', value: '11' },
   ]);
-  // console.log(colorvalue + 'color');
+
   //clarity
   const [clarityOpen, setClarityOpen] = useState(false);
   const [clarityvalue, setClarityValue] = useState('1');
@@ -95,13 +97,10 @@ export default function CalculatorScreen({ navigation }) {
     { label: 'I2', value: '10' },
     { label: 'I3', value: '11' },
   ]);
-  // console.log(clarityvalue + 'clarity');
-  //carat
 
+  //carat
   const [number, onChangeNumber] = React.useState(null);
   const LOWER_LIMIT = 0.0;
-  const HIGHER_LIMIT = 10.99;
-  const currentCaratValue = ['0', '.', '0', '0'];
   const [text, setText] = React.useState('');
 
   const onChangeText = newText => {
@@ -124,13 +123,10 @@ export default function CalculatorScreen({ navigation }) {
           setText((myArray[0] + '.' + myArray[1]).toString());
         } else {
           setText(newText.toString());
-          // console.log(newText + 'test1');
         }
       } else {
         setText(newText.toString());
       }
-
-      // setText((0.01).toString())
     }
   };
 
@@ -208,6 +204,7 @@ export default function CalculatorScreen({ navigation }) {
     },
   ]);
 
+  //function for reset button
   const reset = () => {
     setColorValue('1');
     setClarityValue('1');
@@ -220,14 +217,13 @@ export default function CalculatorScreen({ navigation }) {
     setCurrencySymbol('$');
     setData('0.00');
     setFinalPrice('0.00');
+    Keyboard.dismiss();
   };
-  const test = () => {
-    setColorOpen(false);
-    setShapeOpen(false);
-    setDiscountOpen(false);
-    setPurchaseOpen(false);
-    setCurrencyOpen(false);
-  }
+
+  const closing = () => {//function to remove keyboard
+    Keyboard.dismiss();
+  };
+
   //Currency Dropdown
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currencyvalue, setCurrencyValue] = useState('USD');
@@ -303,15 +299,11 @@ export default function CalculatorScreen({ navigation }) {
     getCurrency();
   }, [finalPrice]);
 
-  // console.log('list Currency: ' + listCurrency.HKD)
-
   const [defaultState, setDefaultState] = useState('USD');
   const [finalPrice, setFinalPrice] = useState('0.00');
   const [data, setData] = useState('0.00');
-  const [currencyPrice, setCurrencyPrice] = useState('');
   const [priceAfterCalc, setPriceAfterCalc] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('$');
-  // console.log('final price: ' + data);
 
   const calcPrice = () => {
     if (text >= 0.01 && text <= 0.03) {
@@ -324,7 +316,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -342,77 +333,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -430,7 +403,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -448,77 +420,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -534,7 +488,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -552,77 +505,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -638,7 +573,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -656,77 +590,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -742,7 +658,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -760,77 +675,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -846,7 +743,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -864,77 +760,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -950,7 +828,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -968,22 +845,17 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
@@ -993,52 +865,40 @@ export default function CalculatorScreen({ navigation }) {
             // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1054,7 +914,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1072,77 +931,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1176,77 +1017,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1262,7 +1085,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1280,77 +1102,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1366,7 +1170,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1384,77 +1187,59 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1470,7 +1255,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1489,76 +1273,58 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1574,7 +1340,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1593,21 +1358,16 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
@@ -1618,8 +1378,6 @@ export default function CalculatorScreen({ navigation }) {
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
@@ -1630,39 +1388,30 @@ export default function CalculatorScreen({ navigation }) {
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1678,7 +1427,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1697,76 +1445,58 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1782,7 +1512,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1801,76 +1530,58 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1886,7 +1597,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -1905,76 +1615,58 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x))
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1990,7 +1682,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -2009,8 +1700,6 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
@@ -2022,63 +1711,48 @@ export default function CalculatorScreen({ navigation }) {
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -2094,7 +1768,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === '1' &&
@@ -2113,160 +1786,123 @@ export default function CalculatorScreen({ navigation }) {
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
           else if (currencyvalue == 'MYR') {
             const x = listCurrency.MYR;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('RM');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'MYR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'JPY') {
             const x = listCurrency.JPY;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('¥');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'JPY',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'TWD') {
             const x = listCurrency.TWD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('NT$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'NTD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'SGD') {
             const x = listCurrency.SGD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('S$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'SGD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           } else if (currencyvalue == 'HKD') {
             const x = listCurrency.HKD;
             const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
-            // const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).toFixed(2);
-            // setCurrencySymbol('HK$');
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
-            // setFinalPrice(final_price);
           }
         })
         .catch(error => {
           console.error(error);
         });
     }
+  };//end of calcPrice function
 
-  };
-  const [pricing, setPricing] = useState('');
   const onValueChange = currencyvalue => {
     if (currencyvalue == 'MYR') {
-      // setCurrencySymbol('RM');
       setDefaultState('MYR');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR))
-      // const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR)).toFixed(2)
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.MYR));
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'MYR',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
     } else if (currencyvalue == 'USD') {
-      // setCurrencySymbol('$');
       setDefaultState('USD');
       const final_price = (parseFloat(data) * 1)
-      // const final_price = (parseFloat(data) * 1).toFixed(2)
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
     }
     else if (currencyvalue == 'TWD') {
-      // setCurrencySymbol('NT$');
       setDefaultState('TWD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD))
-      // const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD)).toFixed(2)
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.TWD));
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'NTD',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
     } else if (currencyvalue == 'SGD') {
-      // setCurrencySymbol('S$');
       setDefaultState('SGD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD))
-      // const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD)).toFixed(2)
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.SGD));
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'SGD',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
 
     } else if (currencyvalue == 'JPY') {
-      // setCurrencySymbol('¥');
       setDefaultState('JPY');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY))
-      // const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY)).toFixed(2)
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.JPY));
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'JPY',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
     } else if (currencyvalue == 'HKD') {
-      // setCurrencySymbol('HK$');
       setDefaultState('HKD');
-      const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD))
-      // const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD)).toFixed(2)
+      const final_price = (parseFloat(data) * parseFloat(listCurrency.HKD));
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'HKD',
       });
       const newFinalPrice = formatter.format(final_price);
       setFinalPrice(newFinalPrice);
-      // setFinalPrice(final_price);
     }
 
   };
@@ -2278,6 +1914,7 @@ export default function CalculatorScreen({ navigation }) {
       setDiscountOpen(false);
       setPurchaseOpen(false);
       setCurrencyOpen(false);
+      Keyboard.dismiss();
     }
     }>
       <SafeAreaView style={styles.main}>
@@ -2324,11 +1961,9 @@ export default function CalculatorScreen({ navigation }) {
                   zIndexInverse={1000}
                   style={{
                     borderColor: '#fff',
-                    // height: 50,
                     width: '95%',
                     textAlign: 'center',
                     alignItems: 'center',
-                    // textAlign: 'center',
                     borderRadius: 5,
                   }}
                   dropDownContainerStyle={{
@@ -2357,7 +1992,6 @@ export default function CalculatorScreen({ navigation }) {
                     height: 50,
                     width: '95%',
                     borderWidth: 1,
-                    // marginTop: 2,
                     padding: 10,
                     backgroundColor: '#fff',
                     borderColor: '#fff',
@@ -2401,7 +2035,6 @@ export default function CalculatorScreen({ navigation }) {
                   setItems={setClarityItems}
                   zIndex={3000}
                   zIndexInverse={1000}
-                  // onValueChange={(value, index) => setValue(value)}
                   style={{
                     borderColor: '#fff',
                     height: 50,
@@ -2496,14 +2129,12 @@ export default function CalculatorScreen({ navigation }) {
                 setItems={setDiscountItems}
                 zIndex={3000}
                 zIndexInverse={1000}
-                // onValueChange={(value, index) => setValue(value)}
                 style={{
                   borderColor: '#fff',
                   height: 50,
                   width: '100%',
                   alignItems: 'center',
                   borderRadius: 5,
-                  // marginVertical: 5,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
@@ -2537,14 +2168,12 @@ export default function CalculatorScreen({ navigation }) {
                 setItems={setPurchaseItems}
                 zIndex={2000}
                 zIndexInverse={2000}
-                // onValueChange={(value, index) => setValue(value)}
                 style={{
                   borderColor: '#fff',
                   height: 50,
                   width: '100%',
                   alignItems: 'center',
                   borderRadius: 5,
-                  // marginVertical: 5,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
@@ -2581,9 +2210,9 @@ export default function CalculatorScreen({ navigation }) {
                     }}>
                     <TouchableOpacity
                       style={{
-                        alignItems: 'center', justifyContent: 'center'
+                        alignItems: 'center', justifyContent: 'center', height: '100%'
                       }}
-                      onPress={calcPrice}>
+                      onPress={() => { calcPrice(); closing() }}>
                       <Text
                         style={{
                           color: '#fff',
@@ -2675,13 +2304,10 @@ export default function CalculatorScreen({ navigation }) {
                     borderLeftColor: '#808080',
                   }}>
                   <Text style={styles.scrollAreaTitle2}>{finalPrice}</Text>
-                  {/* <Text style={styles.scrollAreaTitle2}>{currencySymbol}{finalPrice}</Text> */}
                 </View>
-
               </View>
             </View>
           </View>
-
         </ImageBackground>
       </SafeAreaView >
     </TouchableWithoutFeedback >
@@ -2696,9 +2322,6 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    // justifyContent: 'center',
-    // width: '100%',
-    // height: '100%',
   },
   head: {
     flex: 1,
@@ -2723,13 +2346,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // backgroundColor: 'purple'
   },
   scrollArea: {
     height: '35%',
     maxHeight: 200,
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     width: '90%',
   },
   dropdownarea: {
@@ -2750,7 +2371,6 @@ const styles = StyleSheet.create({
     color: '#000',
     textAlign: 'center',
     fontSize: RFValue(12, 580),
-    paddingVertical: 15,
     width: 200,
   },
   priceListMain: {
@@ -2759,7 +2379,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '90%',
     height: 150,
-    // backgroundColor: '#fff',
     borderRadius: 5,
     marginBottom: 10,
   },

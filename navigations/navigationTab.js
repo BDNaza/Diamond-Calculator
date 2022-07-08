@@ -64,6 +64,8 @@ export default function NavigationTab() {
                                         color: focused ? '#1e2f97' : '#808080',
                                         fontSize: 12,
                                         marginBottom: 10,
+                                        width: 90,
+                                        textAlign: 'center'
                                     }}
                                 >{t("Home")}</Text>
                             </View>
@@ -96,6 +98,8 @@ export default function NavigationTab() {
                                         color: focused ? '#1e2f97' : '#808080',
                                         fontSize: 12,
                                         marginBottom: 10,
+                                        width: 90,
+                                        textAlign: 'center'
                                     }}
                                 >{t("Calculator")}</Text>
                             </View>
@@ -126,6 +130,8 @@ export default function NavigationTab() {
                                         color: focused ? '#1e2f97' : '#808080',
                                         fontSize: 12,
                                         marginBottom: 10,
+                                        width: 90,
+                                        textAlign: 'center'
                                     }}
                                 >{t("Settings")}</Text>
                             </View>

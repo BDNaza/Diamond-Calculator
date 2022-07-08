@@ -1,4 +1,4 @@
-package com.diamondcrane.newarchitecture;
+package com.fccalculator.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.diamondcrane.BuildConfig;
-import com.diamondcrane.newarchitecture.components.MainComponentsRegistry;
-import com.diamondcrane.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.fccalculator.BuildConfig;
+import com.fccalculator.newarchitecture.components.MainComponentsRegistry;
+import com.fccalculator.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -67,14 +67,6 @@ export default function HomeScreen({ navigation }) {
 
     const [data, setData] = useState("")
     const [symbol, setSymbol] = useState("")
-
-    // useEffect(() => {
-
-    //    getPrice();
-
-    // }, [getPrice]);
-    // }
-
     return (
         <SafeAreaView style={styles.main} >
             <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
@@ -218,23 +210,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'flex-start',
         flexDirection: 'column'
-        // ...Platform.select({
-        //     ios: {
-        //         // display: 'red'
-        //     },
-        //     android: {
-        //         display: 'none'
-        //     },
-        //     default: {
-        //         // other platforms, web for example
-        //         // backgroundColor: 'blue'
-        //     }
-        // })
     },
-    // pickerSingle: {
-    //     height: '50%',
-    //     width: '20%',
-    // },
     pickerSingleShape: {
         height: '100%',
         width: '17%',
@@ -311,7 +287,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         fontSize: RFValue(12, 580),
-        width: 70,
+        width: '20%',
+        maxWidth: 80,
         fontFamily: 'Open Sans Light',
         zIndex: 2,
     },
@@ -320,7 +297,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         fontSize: RFValue(12, 580),
-        width: 60,
+        width: '20%',
+        maxWidth: 80,
         fontFamily: 'Open Sans Light',
         zIndex: 2,
     },
@@ -329,7 +307,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         fontSize: RFValue(12, 580),
-        width: 60,
+        width: '20%',
+        maxWidth: 80,
         fontFamily: 'Open Sans Light',
         zIndex: 2,
     },
@@ -403,7 +382,7 @@ const styles = StyleSheet.create({
     pickertitle: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         marginTop: 5,
         paddingHorizontal: 10
     }
