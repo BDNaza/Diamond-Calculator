@@ -9,7 +9,7 @@ import {
   SafeAreaView,
   Image,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard, Alert
 } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useTranslation } from 'react-i18next';
@@ -102,12 +102,11 @@ export default function CalculatorScreen({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
   const LOWER_LIMIT = 0.0;
   const [text, setText] = React.useState('');
-
   const onChangeText = newText => {
     if (newText > 10.99) {
       setText((10.99).toString());
     } else {
-      if (newText >= 0.0 && newText <= 10.99) {
+      if (newText >= 0.1 && newText <= 10.99) {
         let splitNumber = newText;
         const myArray = splitNumber.toString().split('.');
         if (
@@ -258,6 +257,11 @@ export default function CalculatorScreen({ navigation }) {
       value: 'HKD',
       icon: () => <Image source={require('../assets/currency/hk.jpg')} />,
     },
+    {
+      label: 'INR',
+      value: 'INR',
+      icon: () => <Image source={require('../assets/currency/in.jpg')} />,
+    },
   ]);
 
   const [listCurrency, setListCurrency] = useState({
@@ -267,6 +271,7 @@ export default function CalculatorScreen({ navigation }) {
     SGD: '',
     HKD: '',
     USD: '',
+    INR: '',
   });
 
   async function currencyAPI() {
@@ -274,7 +279,7 @@ export default function CalculatorScreen({ navigation }) {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     };
-    const url = `https://api.exchangerate.host/latest?base=USD`;
+    const url = `https://jewel-cafe-staff.com/api/latestRates`;
     try {
       const response = await fetch(url, options);
       const data = await response.json();
@@ -288,12 +293,13 @@ export default function CalculatorScreen({ navigation }) {
     async function getCurrency() {
       const data = await currencyAPI();
       setListCurrency({
-        'MYR': data.rates.MYR,
-        'JPY': data.rates.JPY,
-        'TWD': data.rates.TWD,
-        'SGD': data.rates.SGD,
-        'HKD': data.rates.HKD,
-        'USD': data.rates.USD,
+        'MYR': data.rates[0].MYR,
+        'JPY': data.rates[0].JPY,
+        'TWD': data.rates[0].TWD,
+        'SGD': data.rates[0].SGD,
+        'HKD': data.rates[0].HKD,
+        'USD': data.rates[0].USD,
+        'INR': data.rates[0].INR,
       });
     }
     getCurrency();
@@ -333,7 +339,7 @@ export default function CalculatorScreen({ navigation }) {
           setData(priceFixedTwoDP);
           if (currencyvalue == 'USD') {
             const x = listCurrency.USD;
-            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x)).Math.ceil;
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
@@ -386,8 +392,18 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
+
         .catch(error => {
           console.error(error);
         });
@@ -470,6 +486,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -558,6 +583,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -640,6 +674,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -728,6 +771,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -810,6 +862,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -899,6 +960,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -981,6 +1051,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -1070,6 +1149,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -1152,6 +1240,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -1240,6 +1337,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -1322,6 +1428,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -1412,6 +1527,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -1494,6 +1618,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -1582,6 +1715,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -1664,6 +1806,15 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'HKD',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
@@ -1753,6 +1904,15 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
@@ -1838,11 +1998,28 @@ export default function CalculatorScreen({ navigation }) {
             });
             const newFinalPrice = formatter.format(final_price);
             setFinalPrice(newFinalPrice);
+          } else if (currencyvalue == 'INR') {
+            const x = listCurrency.INR;
+            const final_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            var formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'INR',
+            });
+            const newFinalPrice = formatter.format(final_price);
+            setFinalPrice(newFinalPrice);
           }
         })
         .catch(error => {
           console.error(error);
         });
+    } else if (text == 0) {
+      Alert.alert("Input error", "Please enter value more than 0.0");
+      setFinalPrice('');
+      setText(LOWER_LIMIT);
+    } else if (isNaN(text)) {
+      Alert.alert("Input error", "Please enter numeric value");
+      setFinalPrice('');
+      setText(LOWER_LIMIT);
     }
   };//end of calcPrice function
 

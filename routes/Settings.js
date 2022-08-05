@@ -89,12 +89,12 @@ export default function SettingsScreen({ navigation }) {
                         <TouchableOpacity
                             style={{ alignItems: "center", width: '100%', height: '13%', maxHeight: 80, }}
                             onPress={() => {
-                                // Linking.openURL('https://play.google.com/store/apps/details?id=com.fccalculator')
+                                Linking.openURL('https://play.google.com/store/apps/details?id=com.fccalculator')
                             }}>
                             <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Share_App")}</Text>
                                 <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
-                                    {/* <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} /> */}
+                                    <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -141,7 +141,7 @@ export default function SettingsScreen({ navigation }) {
                                                     style={[styles.buttonModalClose]}
                                                     onPress={() => setModalVisible(!modalVisible)}
                                                 >
-                                                    <Text style={styles.Textmodalclose}>Close</Text>
+                                                    <Text style={styles.Textmodalclose}> {t("close")}</Text>
 
                                                 </Pressable>
                                             </View>
@@ -164,7 +164,7 @@ export default function SettingsScreen({ navigation }) {
                         </View>
                         <View style={{ height: '25%', width: '100%', justifyContent: 'flex-end', alignItems: 'center', }}>
                             <Text style={{ color: '#fff', justifyContent: 'center', }}>
-                                V1.0
+                                V1.0.1
                             </Text>
                         </View>
 
