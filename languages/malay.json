@@ -25,7 +25,10 @@
         "Reset":"Tetapkan semula",
         "Terms_and_conditions":"Terma dan syarat",
         "TNC_description":"Applikasi Diamond Calculator dicipta untuk membantu pengguna dalam menentukan anggaran julat harga untuk berlian berdasarkan kriteria yang tersedia cth: Warna, Karat, Kejelasan dan bentuk. Harga yang ditunjukkan adalah anggaran berdasarkan harga berlian yang dikemas kini. Kami tidak bertanggungjawab terhadap sebarang kerugian yang disebabkan oleh penggunaan aplikasi ini. Terima kasih kerana menggunakan aplikasi ini. \n\nUntuk maklumat lanjut sila lawati Crane Inc.",
-        "close":"tutup"
+        "close":"tutup",
+        "Input_Error": "Input tidak sah",
+        "Input_Detail1": "Sila masukkan nilai lebih daripada 0.0",
+        "Input_Detail2": "Sila masukkan nilai angka"
     }
   }
   

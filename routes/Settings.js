@@ -1,10 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, Image, Linking, Modal, Pressable, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
+
 import i18n from '../languages/i18n'
 import DropDownPicker from 'react-native-dropdown-picker';
 import LanguageDropdown from '../function/languageDropdown';
 import { Translation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SettingsScreen({ navigation }) {
     const { t, i18n } = useTranslation();
@@ -19,6 +21,36 @@ export default function SettingsScreen({ navigation }) {
         { label: 'Chinese', value: 'ch' },
         { label: 'Japanese', value: 'jp' }
     ]);
+
+
+    const handleChangeLng = async (value) => {
+        try {
+            await AsyncStorage.setItem('savedLang', value)
+        } catch (e) {
+            //
+        }
+    }
+
+    useEffect(() => {
+        async function getLang() {
+
+            try {
+                const data = await AsyncStorage.getItem('savedLang')
+                setValue(data);
+
+            } catch (err) {
+                console.log(err);
+            }
+            if (data = null) {
+                setValue('en');
+            } else {
+                setValue(data);
+            }
+        }
+
+        // getLang();
+    }, [value]);
+
 
     const reset = () => {
         setValue('en')
@@ -59,6 +91,7 @@ export default function SettingsScreen({ navigation }) {
                                     setValue={setValue}
                                     setItems={setItems}
                                     onChangeValue={(value) => {
+                                        handleChangeLng(value)
                                         i18n.changeLanguage(value)
                                     }}
                                     style={{
