@@ -28,7 +28,8 @@
         "close":"close",
         "Input_Error": "Input error",
         "Input_Detail1": "Please enter value more than 0.0",
-        "Input_Detail2": "Please enter numeric value"
+        "Input_Detail2": "Please enter numeric value",
+        "Error_Detail1": "Price not available. Please try another combinations"
 
     }
   }

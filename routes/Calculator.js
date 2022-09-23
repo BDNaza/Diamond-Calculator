@@ -137,12 +137,20 @@ export default function CalculatorScreen({ navigation }) {
       label: 'Round',
       value: '1',
     },
+    {
+      label: 'Pear',
+      value: '2',
+    },
   ]);
 
   //Cut Discount
   const [discountOpen, setDiscountOpen] = useState(false);
-  const [discountvalue, setDiscountValue] = useState('20');
+  const [discountvalue, setDiscountValue] = useState('0');
   const [discountitems, setDiscountItems] = useState([
+    {
+      label: 'No Discount',
+      value: '0',
+    },
     {
       label: '-20% (Excellent)',
       value: '20',
@@ -311,6 +319,16 @@ export default function CalculatorScreen({ navigation }) {
   const [priceAfterCalc, setPriceAfterCalc] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('$');
 
+
+  // const checking_price = () => {
+  //   if (finalPrice === isNaN) {
+  //     console.log('firing useEffect');
+  //     Alert.alert(t("Carat value error"), t("Error_Detail3"));
+  //     setFinalPrice('');
+  //     setText(LOWER_LIMIT);
+  //   }
+  // }
+
   const calcPrice = () => {
     if (text >= 0.01 && text <= 0.03) {
       fetch('https://www.jewel-cafe-staff.com/api/showPrice', {
@@ -324,7 +342,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '1',
@@ -409,6 +427,7 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
+
           }
         })
 
@@ -429,7 +448,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '2',
@@ -530,7 +549,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '3',
@@ -631,7 +650,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '4',
@@ -732,7 +751,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '5',
@@ -833,7 +852,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '6',
@@ -934,7 +953,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '7',
@@ -1036,7 +1055,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '8',
@@ -1138,7 +1157,7 @@ export default function CalculatorScreen({ navigation }) {
           // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '9',
@@ -1239,7 +1258,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '10',
@@ -1340,7 +1359,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '11',
@@ -1441,7 +1460,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '12',
@@ -1542,7 +1561,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '13',
@@ -1645,7 +1664,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '14',
@@ -1746,7 +1765,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '15',
@@ -1847,7 +1866,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '16',
@@ -1948,7 +1967,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '17',
@@ -2050,7 +2069,7 @@ export default function CalculatorScreen({ navigation }) {
         .then(responseJson => {
           const filtered = responseJson.data.filter(
             item =>
-              item.id_shape === '1' &&
+              item.id_shape === shapevalue &&
               item.id_color === colorvalue &&
               item.id_clarity === clarityvalue &&
               item.id_carat === '18',
@@ -2139,15 +2158,18 @@ export default function CalculatorScreen({ navigation }) {
         .catch(error => {
           console.error(error);
         });
-    } else if (text == 0) {
+    }
+    else if (text == 0) {
       Alert.alert(t("Input_Error"), t("Input_Detail1"));
       setFinalPrice('');
       setText(LOWER_LIMIT);
-    } else if (isNaN(text)) {
+    }
+    else if (isNaN(text)) {
       Alert.alert(t("Input_Error"), t("Input_Detail2"));
       setFinalPrice('');
       setText(LOWER_LIMIT);
     }
+
   };//end of calcPrice function
 
   const onValueChange = currencyvalue => {
@@ -2192,7 +2214,6 @@ export default function CalculatorScreen({ navigation }) {
       });
       const final_price = formatter.format(rounding_price);
       setFinalPrice(final_price);
-
     } else if (currencyvalue == 'JPY') {
       setDefaultState('JPY');
       const data_price = (parseFloat(data) * parseFloat(listCurrency.JPY));
@@ -2226,6 +2247,7 @@ export default function CalculatorScreen({ navigation }) {
     }
 
   };
+
   return (
     <TouchableWithoutFeedback onPress={() => {
       setClarityOpen(false);
@@ -2237,30 +2259,35 @@ export default function CalculatorScreen({ navigation }) {
       Keyboard.dismiss();
     }
     }>
+
       <SafeAreaView style={styles.main}>
-        <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
+        <ImageBackground
+          source={require('../assets/WelcomeScreen/main-bg.jpg')}
+          resizeMode="cover"
+          style={styles.background}
+        >
           <View style={styles.head}>
             <Image
+              style={styles.logoImage}
               source={require('../assets/navIcon/DiamondIcon.png')}
-              style={{
-                width: '8%',
-                height: '70%',
-                maxHeight: 40,
-                maxWidth: 40,
-                marginLeft: 80,
-                resizeMode: 'contain',
-                tintColor: '#fff',
-              }} />
-            <Text style={styles.headTitle}>{t('Calculator')}</Text>
+            />
+            <Text style={styles.pageTitle}>{t('Calculator')}</Text>
           </View>
 
+
           <View style={styles.body}>
-            <View style={styles.scrollArea}>
-              <View style={{ width: '50%', justifyContent: 'space-evenly', justifyContent: 'space-evenly', }}>
+            <View style={{
+              width: '90%',
+              flexDirection: 'row',
+              zIndex: 5000,
+              justifyContent: 'space-between',
+            }}>
+
+              <View style={styles.quarters}>
                 <Text
                   style={{
                     color: '#fff',
-                    marginTop: '1%',
+                    marginTop: 10,
                     marginBottom: 5,
                     fontWeight: '600',
                     fontSize: RFValue(12, 580),
@@ -2277,20 +2304,19 @@ export default function CalculatorScreen({ navigation }) {
                   setOpen={setColorOpen}
                   setValue={setColorValue}
                   setItems={setColorItems}
-                  zIndex={3000}
-                  zIndexInverse={1000}
+                  zIndex={6000}
+                  onChangeValue={calcPrice}
                   style={{
                     borderColor: '#fff',
-                    width: '95%',
                     textAlign: 'center',
                     alignItems: 'center',
                     borderRadius: 5,
+
                   }}
                   dropDownContainerStyle={{
                     borderColor: '#D3D3D3',
                     backgroundColor: '#D3D3D3',
                     height: 90,
-                    width: '95%',
                   }}
                   labelStyle={{
                     textAlign: 'center',
@@ -2310,36 +2336,35 @@ export default function CalculatorScreen({ navigation }) {
                 <TextInput //Carat
                   style={{
                     height: 50,
-                    width: '95%',
                     borderWidth: 1,
                     padding: 10,
                     backgroundColor: '#fff',
                     borderColor: '#fff',
                     borderRadius: 5,
                     textAlign: 'center',
-                    color: '#000'
+                    color: '#000',
                   }}
-                  onChangeText={onChangeText}
                   value={text}
+                  onChangeText={onChangeText}
+                  onBlur={calcPrice}
                   placeholder="0.2ct"
                   keyboardType="decimal-pad"
                   maxLength={5}
                   returnKeyType={'done'}
                   keyboardAppearance={'default'}
                   autoCorrect={true}
-
                 />
               </View>
 
-              <View style={{ width: '50%', justifyContent: 'space-evenly', justifyContent: 'space-evenly', }}>
+              <View style={styles.quarters}>
+
                 <Text
                   style={{
                     color: '#fff',
-                    marginTop: '1%',
+                    marginTop: 10,
                     marginBottom: 5,
                     fontWeight: '600',
                     fontSize: RFValue(12, 580),
-                    marginLeft: '5%'
                   }}>
                   {t('Clarity')}
                 </Text>
@@ -2353,21 +2378,19 @@ export default function CalculatorScreen({ navigation }) {
                   items={clarityitems}
                   setValue={setClarityValue}
                   setItems={setClarityItems}
-                  zIndex={3000}
-                  zIndexInverse={1000}
+                  onChangeValue={calcPrice}
+                  zIndex={5000}
                   style={{
                     borderColor: '#fff',
                     height: 50,
-                    width: '95%',
                     borderRadius: 5,
-                    marginLeft: '5%'
+
                   }}
                   dropDownContainerStyle={{
                     borderColor: '#D3D3D3',
                     backgroundColor: '#D3D3D3',
                     height: 90,
-                    width: '95%',
-                    marginLeft: '5%'
+                    zIndex: 7000,
                   }}
                   labelStyle={{
                     textAlign: 'center',
@@ -2381,7 +2404,6 @@ export default function CalculatorScreen({ navigation }) {
                     marginBottom: 5,
                     fontWeight: '600',
                     fontSize: RFValue(12, 580),
-                    marginLeft: '5%'
                   }}>
                   {t('Shape')}
                 </Text>
@@ -2395,20 +2417,17 @@ export default function CalculatorScreen({ navigation }) {
                   setOpen={setShapeOpen}
                   setValue={setShapeValue}
                   setItems={setShapeItems}
-                  zIndex={2000}
-                  zIndexInverse={2000}
+                  onChangeValue={calcPrice}
+                  zIndex={5500}
                   style={{
                     borderColor: '#fff',
                     height: 50,
-                    width: '95%',
-                    marginLeft: '5%',
                     borderRadius: 5,
                   }}
                   dropDownContainerStyle={{
                     borderColor: '#D3D3D3',
                     backgroundColor: '#D3D3D3',
-                    width: '95%',
-                    marginLeft: '5%'
+                    height: 90
                   }}
                   labelStyle={{
                     textAlign: 'center',
@@ -2417,20 +2436,11 @@ export default function CalculatorScreen({ navigation }) {
               </View>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'column',
-                height: '48%',
-                maxHeight: 250,
-                width: '90%',
-                justifyContent: 'space-evenly',
-                alignItems: 'flex-start',
-              }}>
+            <View style={styles.discount}>
               <Text
                 style={{
                   color: '#fff',
                   textAlign: 'left',
-                  marginTop: '1%',
                   marginBottom: 5,
                   fontWeight: '600',
                   fontSize: RFValue(12, 580),
@@ -2447,8 +2457,8 @@ export default function CalculatorScreen({ navigation }) {
                 setOpen={setDiscountOpen}
                 setValue={setDiscountValue}
                 setItems={setDiscountItems}
-                zIndex={3000}
-                zIndexInverse={1000}
+                onChangeValue={calcPrice}
+                zIndex={6000}
                 style={{
                   borderColor: '#fff',
                   height: 50,
@@ -2460,16 +2470,18 @@ export default function CalculatorScreen({ navigation }) {
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
                   height: 90,
+                  zIndex: 6000
                 }}
                 labelStyle={{
                   textAlign: 'center',
                 }}
               />
+
               <Text
                 style={{
                   color: '#fff',
                   textAlign: 'left',
-                  marginTop: '1%',
+                  marginTop: 10,
                   marginBottom: 5,
                   fontWeight: '600',
                   fontSize: RFValue(12, 580),
@@ -2486,14 +2498,15 @@ export default function CalculatorScreen({ navigation }) {
                 setOpen={setPurchaseOpen}
                 setValue={setPurchaseValue}
                 setItems={setPurchaseItems}
-                zIndex={2000}
-                zIndexInverse={2000}
+                onChangeValue={calcPrice}
+                zIndex={1000}
                 style={{
                   borderColor: '#fff',
                   height: 50,
                   width: '100%',
                   alignItems: 'center',
                   borderRadius: 5,
+                  zIndex: 1000,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
@@ -2507,81 +2520,25 @@ export default function CalculatorScreen({ navigation }) {
                 }
               />
 
-              <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', height: -1, }}>
+              <Text style={{
+                color: '#fff',
+                textAlign: 'left',
+                marginTop: 10,
+                marginBottom: 5,
+                fontWeight: '600',
+                fontSize: RFValue(12, 580),
+              }}>
+                {t('Diamond_price')}
+              </Text>
+              <View style={styles.priceTagMain}>
                 <View
                   style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    height: -1,
-                    justifyContent: 'space-between',
-                    marginTop: '1%',
-                    alignItems: 'center',
-
-                  }}>
-                  <View
-                    style={{
-                      marginTop: '3%',
-                      width: '49%',
-                      height: '90%',
-                      maxHeight: 50,
-                      backgroundColor: 'blue',
-                      justifyContent: 'center',
-                      borderRadius: 5,
-                    }}>
-                    <TouchableOpacity
-                      style={{
-                        alignItems: 'center', justifyContent: 'center', height: '100%'
-                      }}
-                      onPress={() => { calcPrice(); closing() }}>
-                      <Text
-                        style={{
-                          color: '#fff',
-                          textAlign: 'center',
-                          fontWeight: '600',
-                          fontSize: RFValue(12, 580),
-                        }}>
-                        {t('Calculate')}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View
-                    style={{
-                      marginTop: '3%',
-                      width: '49%',
-                      height: '90%',
-                      maxHeight: 50,
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                      justifyContent: 'center',
-                      borderRadius: 5,
-                      backgroundColor: '#fffff00',
-                    }}>
-                    <TouchableOpacity
-                      style={{ alignItems: 'center', height: '100%', justifyContent: 'center' }}
-                      onPress={reset}>
-                      <Text style={{ color: '#fff', fontWeight: '600', fontSize: RFValue(12, 580), }}>
-                        {t('Reset')}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            </View>
-
-            <View style={{
-              height: -1,
-            }}>
-              <Text style={styles.resultNote}>{t('Diamond_price')}</Text>
-              <View style={styles.priceListMain}>
-                <View
-                  style={{
-                    width: '38%',
+                    width: '40%',
                     height: '50%',
                     maxHeight: 60,
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
                   }}>
-
                   <DropDownPicker //currency
                     selectedValue={currencyitems}
                     defaultValue={'USD'}
@@ -2592,7 +2549,7 @@ export default function CalculatorScreen({ navigation }) {
                     setOpen={setCurrencyOpen}
                     setValue={setCurrencyValue}
                     setItems={setCurrencyItems}
-                    zIndex={1000}
+                    zIndex={900}
                     onChangeValue={onValueChange}
                     style={{
                       borderColor: '#fff',
@@ -2602,10 +2559,12 @@ export default function CalculatorScreen({ navigation }) {
                       borderBottomRightRadius: 0,
                       borderTopRightRadius: 0,
                       borderRadius: 5,
+                      zIndex: 900
                     }}
                     dropDownContainerStyle={{
                       borderColor: '#D3D3D3',
                       height: 120,
+                      zIndex: 900,
                     }}
                     controller={(instance) => dropDownRef.current = instance}
                   />
@@ -2623,9 +2582,33 @@ export default function CalculatorScreen({ navigation }) {
                     borderBottomLeftRadius: 0,
                     borderLeftColor: '#808080',
                   }}>
-                  <Text style={styles.scrollAreaTitle2}>{finalPrice}</Text>
+                  <Text style={styles.priceTag}>{finalPrice}</Text>
                 </View>
               </View>
+
+              <View style={{ display: 'flex', alignItems: 'center', }}>
+                <View style={styles.resetButton}>
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'center',
+                      height: '100%',
+                      width: '100%',
+                      justifyContent: 'center'
+                    }}
+                    onPress={reset}>
+                    <Text style={{
+                      color: '#fff',
+                      fontWeight: '600',
+                      fontSize: RFValue(12, 580),
+                      width: '100%',
+                      textAlign: 'center'
+                    }}>
+                      {t('Reset')}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
             </View>
           </View>
         </ImageBackground>
@@ -2654,52 +2637,65 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headTitle: {
+  pageTitle: {
     color: '#fff',
     textAlign: 'left',
     paddingLeft: 5,
     fontSize: 30,
     width: '100%',
   },
+  logoImage: {
+    width: '8%',
+    height: '70%',
+    maxHeight: 40,
+    maxWidth: 40,
+    marginLeft: 80,
+    resizeMode: 'contain',
+    tintColor: '#fff',
+  },
   body: {
-    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: '5%',
   },
-  scrollArea: {
-    height: '35%',
-    maxHeight: 200,
-    flexDirection: 'row',
+  quarters: {
+    width: '48%',
+    zIndex: 5000,
+    paddingBottom: 10,
+  },
+  discount: {
     width: '90%',
+    zIndex: 1,
+    // marginTop: -85
+
   },
-  dropdownarea: {
-    borderRadius: 5,
+  resetButton: {
+    display: 'flex',
+    marginTop: '-25%',
+    width: '100%',
+    maxHeight: 50,
     borderWidth: 1,
-    backgroundColor: '#fff',
     borderColor: '#fff',
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: '#fffff00',
+    zIndex: 50
+
   },
-  resultNote: {
-    width: '90%',
-    color: '#fff',
-    marginTop: '1%',
-    marginBottom: 5,
-    fontSize: RFValue(12, 580),
-    fontWeight: '600',
+  priceTagMain: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    width: '100%',
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingBottom: '30%'
   },
-  scrollAreaTitle2: {
+  priceTag: {
     color: '#000',
     textAlign: 'center',
     fontSize: RFValue(12, 580),
     width: 200,
   },
-  priceListMain: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '90%',
-    height: 150,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
+
 });

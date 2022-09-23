@@ -43,6 +43,10 @@ export default class Example extends React.Component {
                 value: 1,
                 label: 'Round',
               },
+              {
+                value: 2,
+                label: 'Pear',
+              },
             ]}
             onScroll={({ index, item }) => {
               ReactNativeHapticFeedback.trigger("notificationError", options);

@@ -31,7 +31,7 @@ class LoadingScreen extends Component {
             <View style={styles.main}>
                 <ImageBackground resizeMode="cover" style={styles.background} source={require('../assets/WelcomeScreen/backscreen.jpg')}></ImageBackground>
                 <Image style={styles.logoimg} source={require('../assets/WelcomeScreen/diamondicon.png')} />
-                <Text style={styles.textlogo}>DIAMOND CALCULATOR</Text>
+                <Text style={styles.textlogo}>4CCALCULATOR</Text>
             </View >
 
 

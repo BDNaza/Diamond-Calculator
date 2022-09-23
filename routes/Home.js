@@ -33,7 +33,7 @@ export default function HomeScreen({ navigation }) {
         setStateSelectedPicker(prev => ({ ...prev, selectedCaratIndex: index }));
 
     };
-
+    const shape = stateSelectedPicker.selectedShapeIndex
     const color = stateSelectedPicker.selectedColorIndex
     const clarity = stateSelectedPicker.selectedClarityIndex
     const carat = stateSelectedPicker.selectedCaratIndex
@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation }) {
             .then(responseJson => {
                 const filtered = responseJson.data.filter(
                     (item) =>
-                        item.id_shape === "1" &&
+                        item.id_shape === JSON.stringify(shape) &&
                         item.id_color === JSON.stringify(color) &&
                         item.id_clarity === JSON.stringify(clarity) &&
                         item.id_carat === JSON.stringify(carat)

@@ -33,24 +33,25 @@ export default function SettingsScreen({ navigation }) {
 
     useEffect(() => {
         async function getLang() {
-
             try {
                 const data = await AsyncStorage.getItem('savedLang')
                 setValue(data);
 
+
             } catch (err) {
                 console.log(err);
             }
-            if (data = null) {
-                setValue('en');
-            } else {
-                setValue(data);
-            }
+
         }
 
-        // getLang();
-    }, [value]);
+        getLang();
+    }, []);
 
+
+    if (value == null) {
+        setValue('en');
+
+    }
 
     const reset = () => {
         setValue('en')
@@ -87,6 +88,7 @@ export default function SettingsScreen({ navigation }) {
                                     open={open}
                                     value={value}
                                     items={items}
+                                    defaultValue={'en'}
                                     setOpen={setOpen}
                                     setValue={setValue}
                                     setItems={setItems}
@@ -197,7 +199,7 @@ export default function SettingsScreen({ navigation }) {
                         </View>
                         <View style={{ height: '25%', width: '100%', justifyContent: 'flex-end', alignItems: 'center', }}>
                             <Text style={{ color: '#fff', justifyContent: 'center', }}>
-                                V1.0.1
+                                V1.1
                             </Text>
                         </View>
 
