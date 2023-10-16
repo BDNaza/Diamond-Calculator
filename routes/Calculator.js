@@ -9,11 +9,12 @@ import {
   SafeAreaView,
   Image,
   TouchableWithoutFeedback,
-  Keyboard, Alert
+  Keyboard, Alert, ScrollView
 } from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useTranslation } from 'react-i18next';
 import DropDownPicker from 'react-native-dropdown-picker';
+import checkVersion from '../function/versioncheck'
 
 export default function CalculatorScreen({ navigation }) {
   const { t, i18n } = useTranslation();
@@ -217,7 +218,7 @@ export default function CalculatorScreen({ navigation }) {
     setClarityValue('1');
     setText(LOWER_LIMIT);
     setShapeValue('1');
-    setDiscountValue('20');
+    setDiscountValue('0');
     setPurchaseValue('0');
     setPriceAfterCalc('');
     setCurrencyValue('USD');
@@ -270,6 +271,11 @@ export default function CalculatorScreen({ navigation }) {
       value: 'INR',
       icon: () => <Image source={require('../assets/currency/in.jpg')} />,
     },
+    {
+      label: 'THB',
+      value: 'THB',
+      icon: () => <Image source={require('../assets/currency/thai.png')} />,
+    },
   ]);
 
   const [listCurrency, setListCurrency] = useState({
@@ -308,26 +314,20 @@ export default function CalculatorScreen({ navigation }) {
         'HKD': data.rates[0].HKD,
         'USD': data.rates[0].USD,
         'INR': data.rates[0].INR,
+        'THB': data.rates[0].THB,
       });
     }
     getCurrency();
+    checkVersion();
   }, [finalPrice]);
+
+
 
   const [defaultState, setDefaultState] = useState('USD');
   const [finalPrice, setFinalPrice] = useState('0.00');
   const [data, setData] = useState('0.00');
   const [priceAfterCalc, setPriceAfterCalc] = useState('');
   const [currencySymbol, setCurrencySymbol] = useState('$');
-
-
-  // const checking_price = () => {
-  //   if (finalPrice === isNaN) {
-  //     console.log('firing useEffect');
-  //     Alert.alert(t("Carat value error"), t("Error_Detail3"));
-  //     setFinalPrice('');
-  //     setText(LOWER_LIMIT);
-  //   }
-  // }
 
   const calcPrice = () => {
     if (text >= 0.01 && text <= 0.03) {
@@ -427,7 +427,16 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
-
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
           }
         })
 
@@ -533,6 +542,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -630,6 +650,17 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -735,6 +766,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -836,6 +878,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -933,6 +986,17 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -1039,6 +1103,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -1140,6 +1215,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -1154,7 +1240,6 @@ export default function CalculatorScreen({ navigation }) {
       })
         .then(response => response.json())
         .then(responseJson => {
-          // console.log(responseJson.data);
           const filtered = responseJson.data.filter(
             item =>
               item.id_shape === shapevalue &&
@@ -1238,6 +1323,17 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -1343,6 +1439,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -1444,6 +1551,17 @@ export default function CalculatorScreen({ navigation }) {
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
           }
+          else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -1541,6 +1659,16 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -1647,6 +1775,16 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1745,6 +1883,16 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -1849,6 +1997,16 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -1947,6 +2105,16 @@ export default function CalculatorScreen({ navigation }) {
             var formatter = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'INR',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
@@ -2052,6 +2220,16 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
           }
         })
         .catch(error => {
@@ -2153,100 +2331,194 @@ export default function CalculatorScreen({ navigation }) {
             });
             const final_price = formatter.format(rounding_price);
             setFinalPrice(final_price);
+          } else if (currencyvalue == 'THB') {
+            const x = listCurrency.THB;
+            const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+            const rounding_price = Math.ceil(data_price)
+            var formatter = new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+            });
+            const final_price = formatter.format(rounding_price);
+            setFinalPrice(final_price);
           }
         })
         .catch(error => {
           console.error(error);
         });
     }
-    else if (text == 0) {
-      Alert.alert(t("Input_Error"), t("Input_Detail1"));
-      setFinalPrice('');
-      setText(LOWER_LIMIT);
-    }
+    // else if (text == 0) {
+    //   Alert.alert(t("Input_Error"), t("Input_Detail1"));
+    //   setFinalPrice('');
+    //   setText(LOWER_LIMIT);
+    // }
     else if (isNaN(text)) {
       Alert.alert(t("Input_Error"), t("Input_Detail2"));
       setFinalPrice('');
       setText(LOWER_LIMIT);
     }
+    else if (text == '0') {
+      if (currencyvalue == 'MYR') {
+        setDefaultState('MYR');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.MYR));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'MYR',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'USD') {
+        setDefaultState('USD');
+        const data_price = (parseFloat(data) * 1)
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      }
+      else if (currencyvalue == 'TWD') {
+        setDefaultState('TWD');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.TWD));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'NTD',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'SGD') {
+        setDefaultState('SGD');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.SGD));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'SGD',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'JPY') {
+        setDefaultState('JPY');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.JPY));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'JPY',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'HKD') {
+        setDefaultState('HKD');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.HKD));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'HKD',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'INR') {
+        setDefaultState('INR');
+        const data_price = (parseFloat(data) * parseFloat(listCurrency.INR));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'INR',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      } else if (currencyvalue == 'THB') {
+        const x = listCurrency.THB;
+        const data_price = (parseFloat(priceFixedTwoDP) * parseFloat(x));
+        const rounding_price = Math.ceil(data_price)
+        var formatter = new Intl.NumberFormat('th-TH', {
+          style: 'currency',
+          currency: 'THB',
+        });
+        const final_price = formatter.format(rounding_price);
+        setFinalPrice(final_price);
+      }
+    }
 
   };//end of calcPrice function
 
-  const onValueChange = currencyvalue => {
-    if (currencyvalue == 'MYR') {
-      setDefaultState('MYR');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.MYR));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'MYR',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    } else if (currencyvalue == 'USD') {
-      setDefaultState('USD');
-      const data_price = (parseFloat(data) * 1)
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    }
-    else if (currencyvalue == 'TWD') {
-      setDefaultState('TWD');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.TWD));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'NTD',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    } else if (currencyvalue == 'SGD') {
-      setDefaultState('SGD');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.SGD));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'SGD',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    } else if (currencyvalue == 'JPY') {
-      setDefaultState('JPY');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.JPY));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'JPY',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    } else if (currencyvalue == 'HKD') {
-      setDefaultState('HKD');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.HKD));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'HKD',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    } else if (currencyvalue == 'INR') {
-      setDefaultState('INR');
-      const data_price = (parseFloat(data) * parseFloat(listCurrency.INR));
-      const rounding_price = Math.ceil(data_price)
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'INR',
-      });
-      const final_price = formatter.format(rounding_price);
-      setFinalPrice(final_price);
-    }
+  // const onValueChange = currencyvalue => {
+  //   if (currencyvalue == 'MYR') {
+  //     setDefaultState('MYR');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.MYR));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'MYR',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   } else if (currencyvalue == 'USD') {
+  //     setDefaultState('USD');
+  //     const data_price = (parseFloat(data) * 1)
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'USD',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   }
+  //   else if (currencyvalue == 'TWD') {
+  //     setDefaultState('TWD');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.TWD));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'NTD',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   } else if (currencyvalue == 'SGD') {
+  //     setDefaultState('SGD');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.SGD));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'SGD',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   } else if (currencyvalue == 'JPY') {
+  //     setDefaultState('JPY');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.JPY));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'JPY',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   } else if (currencyvalue == 'HKD') {
+  //     setDefaultState('HKD');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.HKD));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'HKD',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   } else if (currencyvalue == 'INR') {
+  //     setDefaultState('INR');
+  //     const data_price = (parseFloat(data) * parseFloat(listCurrency.INR));
+  //     const rounding_price = Math.ceil(data_price)
+  //     var formatter = new Intl.NumberFormat('en-US', {
+  //       style: 'currency',
+  //       currency: 'INR',
+  //     });
+  //     const final_price = formatter.format(rounding_price);
+  //     setFinalPrice(final_price);
+  //   }
 
-  };
+  // };
 
   return (
     <TouchableWithoutFeedback onPress={() => {
@@ -2271,7 +2543,10 @@ export default function CalculatorScreen({ navigation }) {
               style={styles.logoImage}
               source={require('../assets/navIcon/DiamondIcon.png')}
             />
-            <Text style={styles.pageTitle}>{t('Calculator')}</Text>
+            <Text
+              allowFontScaling={true}
+              adjustsFontSizeToFit={true}
+              style={styles.pageTitle}>{t('Calculator')}</Text>
           </View>
 
 
@@ -2279,175 +2554,189 @@ export default function CalculatorScreen({ navigation }) {
             <View style={{
               width: '90%',
               flexDirection: 'row',
-              zIndex: 5000,
               justifyContent: 'space-between',
+              marginTop: 10,
+              flexWrap: 'wrap',
+              paddingBottom: '20%'
             }}>
+              <Text //carat text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
+                style={{
+                  color: '#fff',
+                  width: '40%',
+                  marginBottom: 5,
+                  fontWeight: '600',
+                  fontSize: 16
+                }}>
+                {t('Carat')}
+              </Text>
+              <Text //color text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
+                style={{
+                  color: '#fff',
+                  // marginTop: '10%',
+                  width: '48%',
+                  marginBottom: 5,
+                  fontWeight: '600',
+                  fontSize: 16
+                }}>
+                {t('Color')}
+              </Text>
+              <TextInput //Carat dropdown
+                style={{
+                  height: 50,
+                  borderWidth: 1,
+                  padding: 10,
+                  backgroundColor: '#fff',
+                  borderColor: '#fff',
+                  borderRadius: 5,
+                  textAlign: 'center',
+                  color: '#000',
+                  width: '48%',
+                }}
+                value={text}
+                onChangeText={onChangeText}
+                onBlur={calcPrice}
+                placeholder="0.2ct"
+                keyboardType="decimal-pad"
+                maxLength={5}
+                returnKeyType={'done'}
+                keyboardAppearance={'default'}
+                autoCorrect={true}
+              />
 
-              <View style={styles.quarters}>
-                <Text
-                  style={{
-                    color: '#fff',
-                    marginTop: 10,
-                    marginBottom: 5,
-                    fontWeight: '600',
-                    fontSize: RFValue(12, 580),
-                  }}>
-                  {t('Color')}
-                </Text>
-                <DropDownPicker //Color
-                  selectedValue={coloritems}
-                  defaultValue={'E'}
-                  open={colorOpen}
-                  onOpen={onColorOpen}
-                  value={colorvalue}
-                  items={coloritems}
-                  setOpen={setColorOpen}
-                  setValue={setColorValue}
-                  setItems={setColorItems}
-                  zIndex={6000}
-                  onChangeValue={calcPrice}
-                  style={{
-                    borderColor: '#fff',
-                    textAlign: 'center',
-                    alignItems: 'center',
-                    borderRadius: 5,
+              <DropDownPicker //Color dropdown
+                selectedValue={coloritems}
+                defaultValue={'E'}
+                open={colorOpen}
+                onOpen={onColorOpen}
+                value={colorvalue}
+                items={coloritems}
+                setOpen={setColorOpen}
+                setValue={setColorValue}
+                setItems={setColorItems}
+                zIndex={7000}
+                onChangeValue={calcPrice}
+                containerStyle={{ width: '48%' }}
+                style={{
+                  borderColor: '#fff',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  borderRadius: 5,
+                }}
+                dropDownContainerStyle={{
+                  borderColor: '#D3D3D3',
+                  backgroundColor: '#D3D3D3',
+                  height: 90,
+                }}
+                labelStyle={{
+                  textAlign: 'center',
+                }}
+              />
 
-                  }}
-                  dropDownContainerStyle={{
-                    borderColor: '#D3D3D3',
-                    backgroundColor: '#D3D3D3',
-                    height: 90,
-                  }}
-                  labelStyle={{
-                    textAlign: 'center',
-                  }}
-                />
+              <Text //clarity text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
+                style={{
+                  color: '#fff',
+                  marginTop: '5%',
+                  marginBottom: 5,
+                  fontWeight: '600',
+                  fontSize: 16,
+                  width: '40%'
+                }}>
+                {t('Clarity')}
+              </Text>
+              <Text //shape text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
+                style={{
+                  color: '#fff',
+                  marginBottom: 5,
+                  fontWeight: '600',
+                  fontSize: 16,
+                  width: '48%',
+                  marginTop: '5%',
+                }}>
+                {t('Shape')}
+              </Text>
 
-                <Text
-                  style={{
-                    color: '#fff',
-                    marginTop: '1%',
-                    marginBottom: 5,
-                    fontWeight: '600',
-                    fontSize: RFValue(12, 580),
-                  }}>
-                  {t('Carat')}
-                </Text>
-                <TextInput //Carat
-                  style={{
-                    height: 50,
-                    borderWidth: 1,
-                    padding: 10,
-                    backgroundColor: '#fff',
-                    borderColor: '#fff',
-                    borderRadius: 5,
-                    textAlign: 'center',
-                    color: '#000',
-                  }}
-                  value={text}
-                  onChangeText={onChangeText}
-                  onBlur={calcPrice}
-                  placeholder="0.2ct"
-                  keyboardType="decimal-pad"
-                  maxLength={5}
-                  returnKeyType={'done'}
-                  keyboardAppearance={'default'}
-                  autoCorrect={true}
-                />
-              </View>
+              <DropDownPicker //Clarity dropdown
+                selectedValue={clarityitems}
+                defaultValue={'FL'}
+                open={clarityOpen}
+                onOpen={onClarityOpen}
+                setOpen={setClarityOpen}
+                value={clarityvalue}
+                items={clarityitems}
+                setValue={setClarityValue}
+                setItems={setClarityItems}
+                onChangeValue={calcPrice}
+                containerStyle={{ width: '48%' }}
+                backgroundColor={'red'}
+                zIndex={6000}
+                listParentContainerStyle={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                style={{
+                  borderColor: '#fff',
+                  height: 50,
+                  borderRadius: 5,
+                }}
+                dropDownContainerStyle={{
+                  borderColor: '#D3D3D3',
+                  backgroundColor: '#D3D3D3',
+                  height: 90,
+                }}
+                labelStyle={{
+                  textAlign: 'center',
+                }}
+              />
 
-              <View style={styles.quarters}>
-
-                <Text
-                  style={{
-                    color: '#fff',
-                    marginTop: 10,
-                    marginBottom: 5,
-                    fontWeight: '600',
-                    fontSize: RFValue(12, 580),
-                  }}>
-                  {t('Clarity')}
-                </Text>
-                <DropDownPicker //Clarity
-                  selectedValue={clarityitems}
-                  defaultValue={'FL'}
-                  open={clarityOpen}
-                  onOpen={onClarityOpen}
-                  setOpen={setClarityOpen}
-                  value={clarityvalue}
-                  items={clarityitems}
-                  setValue={setClarityValue}
-                  setItems={setClarityItems}
-                  onChangeValue={calcPrice}
-                  zIndex={5000}
-                  style={{
-                    borderColor: '#fff',
-                    height: 50,
-                    borderRadius: 5,
-
-                  }}
-                  dropDownContainerStyle={{
-                    borderColor: '#D3D3D3',
-                    backgroundColor: '#D3D3D3',
-                    height: 90,
-                    zIndex: 7000,
-                  }}
-                  labelStyle={{
-                    textAlign: 'center',
-                  }}
-                />
-
-                <Text
-                  style={{
-                    color: '#fff',
-                    marginTop: '1%',
-                    marginBottom: 5,
-                    fontWeight: '600',
-                    fontSize: RFValue(12, 580),
-                  }}>
-                  {t('Shape')}
-                </Text>
-                <DropDownPicker //Shape
-                  selectedValue={shapeitems}
-                  defaultValue={'Round'}
-                  open={shapeOpen}
-                  onOpen={onShapeOpen}
-                  value={shapevalue}
-                  items={shapeitems}
-                  setOpen={setShapeOpen}
-                  setValue={setShapeValue}
-                  setItems={setShapeItems}
-                  onChangeValue={calcPrice}
-                  zIndex={5500}
-                  style={{
-                    borderColor: '#fff',
-                    height: 50,
-                    borderRadius: 5,
-                  }}
-                  dropDownContainerStyle={{
-                    borderColor: '#D3D3D3',
-                    backgroundColor: '#D3D3D3',
-                    height: 90
-                  }}
-                  labelStyle={{
-                    textAlign: 'center',
-                  }}
-                />
-              </View>
-            </View>
-
-            <View style={styles.discount}>
+              <DropDownPicker //Shape dropdown
+                selectedValue={shapeitems}
+                defaultValue={'Round'}
+                open={shapeOpen}
+                onOpen={onShapeOpen}
+                value={shapevalue}
+                items={shapeitems}
+                setOpen={setShapeOpen}
+                setValue={setShapeValue}
+                setItems={setShapeItems}
+                onChangeValue={calcPrice}
+                containerStyle={{ width: '48%' }}
+                zIndex={6000}
+                style={{
+                  borderColor: '#fff',
+                  height: 50,
+                  borderRadius: 5,
+                }}
+                dropDownContainerStyle={{
+                  borderColor: '#D3D3D3',
+                  backgroundColor: '#D3D3D3',
+                  height: 90,
+                }}
+                labelStyle={{
+                  textAlign: 'center',
+                }}
+              />
               <Text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
                 style={{
                   color: '#fff',
                   textAlign: 'left',
                   marginBottom: 5,
                   fontWeight: '600',
-                  fontSize: RFValue(12, 580),
+                  fontSize: 16,
+                  marginTop: '5%',
                 }}>
                 {t('Discount')}
               </Text>
-              <DropDownPicker //discount
+              <DropDownPicker //cut discount
                 selectedValue={discountitems}
                 defaultValue={'30%'}
                 open={discountOpen}
@@ -2458,7 +2747,7 @@ export default function CalculatorScreen({ navigation }) {
                 setValue={setDiscountValue}
                 setItems={setDiscountItems}
                 onChangeValue={calcPrice}
-                zIndex={6000}
+                zIndex={5000}
                 style={{
                   borderColor: '#fff',
                   height: 50,
@@ -2470,21 +2759,22 @@ export default function CalculatorScreen({ navigation }) {
                   borderColor: '#D3D3D3',
                   backgroundColor: '#D3D3D3',
                   height: 90,
-                  zIndex: 6000
                 }}
                 labelStyle={{
                   textAlign: 'center',
                 }}
               />
-
               <Text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
                 style={{
                   color: '#fff',
                   textAlign: 'left',
                   marginTop: 10,
                   marginBottom: 5,
                   fontWeight: '600',
-                  fontSize: RFValue(12, 580),
+                  fontSize: 16,
+                  marginTop: '5%',
                 }}>
                 {t('PurchasePrice')}
               </Text>
@@ -2499,14 +2789,15 @@ export default function CalculatorScreen({ navigation }) {
                 setValue={setPurchaseValue}
                 setItems={setPurchaseItems}
                 onChangeValue={calcPrice}
-                zIndex={1000}
+                zIndex={4000}
+                // zIndex={1000}
                 style={{
                   borderColor: '#fff',
                   height: 50,
                   width: '100%',
                   alignItems: 'center',
                   borderRadius: 5,
-                  zIndex: 1000,
+                  // zIndex: 1000,
                 }}
                 dropDownContainerStyle={{
                   borderColor: '#D3D3D3',
@@ -2520,95 +2811,96 @@ export default function CalculatorScreen({ navigation }) {
                 }
               />
 
-              <Text style={{
-                color: '#fff',
-                textAlign: 'left',
-                marginTop: 10,
-                marginBottom: 5,
-                fontWeight: '600',
-                fontSize: RFValue(12, 580),
-              }}>
+              <Text
+                allowFontScaling={true}
+                adjustsFontSizeToFit={true}
+
+                style={{
+                  color: '#fff',
+                  textAlign: 'left',
+                  marginTop: 10,
+                  marginBottom: 5,
+                  fontWeight: '600',
+                  fontSize: 16,
+                  marginTop: '5%',
+                  width: '100%'
+                }}>
                 {t('Diamond_price')}
               </Text>
-              <View style={styles.priceTagMain}>
-                <View
-                  style={{
-                    width: '40%',
-                    height: '50%',
-                    maxHeight: 60,
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                  }}>
-                  <DropDownPicker //currency
-                    selectedValue={currencyitems}
-                    defaultValue={'USD'}
-                    open={currencyOpen}
-                    onOpen={onCurrencyOpen}
-                    value={currencyvalue}
-                    items={currencyitems}
-                    setOpen={setCurrencyOpen}
-                    setValue={setCurrencyValue}
-                    setItems={setCurrencyItems}
-                    zIndex={900}
-                    onChangeValue={onValueChange}
-                    style={{
-                      borderColor: '#fff',
-                      height: 50,
-                      width: '100%',
-                      alignItems: 'center',
-                      borderBottomRightRadius: 0,
-                      borderTopRightRadius: 0,
-                      borderRadius: 5,
-                      zIndex: 900
-                    }}
-                    dropDownContainerStyle={{
-                      borderColor: '#D3D3D3',
-                      height: 120,
-                      zIndex: 900,
-                    }}
-                    controller={(instance) => dropDownRef.current = instance}
-                  />
-                </View>
-                <View
-                  style={{
-                    width: '60%',
-                    height: 50,
-                    borderRadius: 5,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#fff',
-                    borderLeftWidth: 1,
-                    borderTopLeftRadius: 0,
-                    borderBottomLeftRadius: 0,
-                    borderLeftColor: '#808080',
-                  }}>
-                  <Text style={styles.priceTag}>{finalPrice}</Text>
-                </View>
+
+              <DropDownPicker //currency
+                selectedValue={currencyitems}
+                defaultValue={'USD'}
+                open={currencyOpen}
+                onOpen={onCurrencyOpen}
+                value={currencyvalue}
+                items={currencyitems}
+                setOpen={setCurrencyOpen}
+                setValue={setCurrencyValue}
+                setItems={setCurrencyItems}
+                zIndex={3000}
+                // onChangeValue={onValueChange}
+                onChangeValue={calcPrice}
+                dropDownDirection="bottom"
+                containerStyle={{ width: '40%' }}
+                style={{
+                  borderColor: '#fff',
+                  height: 50,
+                  width: '100%',
+                  alignItems: 'center',
+                  borderBottomRightRadius: 0,
+                  borderTopRightRadius: 0,
+                  borderRadius: 5,
+                }}
+                dropDownContainerStyle={{
+                  borderColor: '#D3D3D3',
+                  height: 120,
+                }}
+                controller={(instance) => dropDownRef.current = instance}
+              />
+              <View
+                style={{
+                  width: '60%',
+                  height: 50,
+                  borderRadius: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#fff',
+                  borderLeftWidth: 1,
+                  borderTopLeftRadius: 0,
+                  borderBottomLeftRadius: 0,
+                  borderLeftColor: '#808080',
+                }}>
+                <Text
+                  allowFontScaling={true}
+                  adjustsFontSizeToFit={true}
+                  style={styles.priceTag}>{finalPrice}</Text>
               </View>
 
-              <View style={{ display: 'flex', alignItems: 'center', }}>
-                <View style={styles.resetButton}>
-                  <TouchableOpacity
+              <View style={styles.resetButton}>
+                <TouchableOpacity
+                  style={{
+                    alignItems: 'center',
+                    height: '100%',
+                    width: '100%',
+                    justifyContent: 'center'
+                  }}
+                  onPress={reset}>
+                  <Text
+                    allowFontScaling={true}
+                    adjustsFontSizeToFit={true}
+
                     style={{
-                      alignItems: 'center',
-                      height: '100%',
-                      width: '100%',
-                      justifyContent: 'center'
-                    }}
-                    onPress={reset}>
-                    <Text style={{
                       color: '#fff',
                       fontWeight: '600',
-                      fontSize: RFValue(12, 580),
+                      fontSize: 16,
                       width: '100%',
                       textAlign: 'center'
                     }}>
-                      {t('Reset')}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                    {t('Reset')}
+                  </Text>
+                </TouchableOpacity>
               </View>
-
             </View>
           </View>
         </ImageBackground>
@@ -2621,7 +2913,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   background: {
     flex: 1,
@@ -2654,32 +2946,21 @@ const styles = StyleSheet.create({
     tintColor: '#fff',
   },
   body: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '5%',
-  },
-  quarters: {
-    width: '48%',
-    zIndex: 5000,
-    paddingBottom: 10,
-  },
-  discount: {
-    width: '90%',
-    zIndex: 1,
-    // marginTop: -85
+    justifyContent: 'flex-start',
 
   },
   resetButton: {
     display: 'flex',
-    marginTop: '-25%',
     width: '100%',
     maxHeight: 50,
     borderWidth: 1,
     borderColor: '#fff',
     justifyContent: 'center',
     borderRadius: 5,
-    backgroundColor: '#fffff00',
-    zIndex: 50
+    marginTop: '8%',
 
   },
   priceTagMain: {
@@ -2689,12 +2970,13 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
     marginBottom: 10,
-    paddingBottom: '30%'
+    backgroundColor: 'red'
+    // paddingBottom: '30%'
   },
   priceTag: {
     color: '#000',
     textAlign: 'center',
-    fontSize: RFValue(12, 580),
+    fontSize: 16,
     width: 200,
   },
 

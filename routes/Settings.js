@@ -1,16 +1,25 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View, StyleSheet, ImageBackground, TouchableOpacity, Image, Linking, Modal, Pressable, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
-
+import checkVersion from '../function/versioncheck'
 import i18n from '../languages/i18n'
 import DropDownPicker from 'react-native-dropdown-picker';
 import LanguageDropdown from '../function/languageDropdown';
 import { Translation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18next from 'i18next';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 export default function SettingsScreen({ navigation }) {
     const { t, i18n } = useTranslation();
     const [modalVisible, setModalVisible] = useState(false);
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+    const [monthEN, setMonthEN] = useState('');
+    const [monthMY, setMonthMY] = useState('');
 
     // const { t, i18n } = useTranslation();
     const [open, setOpen] = useState(false);
@@ -22,6 +31,51 @@ export default function SettingsScreen({ navigation }) {
         { label: 'Japanese', value: 'jp' }
     ]);
 
+    const getDates = () => {
+
+        fetch('https://www.jewel-cafe-staff.com/api/showPrice', {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                const filtered = responseJson.data.filter(
+                    (item) =>
+                        item.id_shape === 1 &&
+                        item.id_color === 1 &&
+                        item.id_clarity === 1 &&
+                        item.id_carat === 1
+                );
+                //convert date from api to log format
+                const date = (JSON.stringify(responseJson.data[0].updated_at)).slice(1, 11).toString();
+                var day = date.slice(8, 10).replace(/^0+/, '');
+                var month = date.slice(5, 7).replace(/^0+/, '');
+                var year = date.slice(0, 4);
+                const formatterMY = new Intl.DateTimeFormat('ms-MY', { month: 'long' });
+                const formatterEN = new Intl.DateTimeFormat('en-MY', { month: 'long' });
+                var monthNameMY = formatterMY.format(new Date(date));
+                var monthNameEN = formatterEN.format(new Date(date));
+
+                setDay(day);
+                setMonth(month);
+                setYear(year);
+                setMonthEN(monthNameEN);
+
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    };
+    useFocusEffect(
+        React.useCallback(() => {
+            getDates();
+        }, [])
+    );
 
     const handleChangeLng = async (value) => {
         try {
@@ -43,7 +97,7 @@ export default function SettingsScreen({ navigation }) {
             }
 
         }
-
+        checkVersion();
         getLang();
     }, []);
 
@@ -72,17 +126,30 @@ export default function SettingsScreen({ navigation }) {
                                 resizeMode: 'contain',
                                 tintColor: '#fff',
                             }} />
-                        <Text style={styles.headTitle}>{t("Settings")}</Text>
+                        <Text
+                            allowFontScaling={true}
+                            adjustsFontSizeToFit={true}
+                            style={styles.headTitle}>{t("Settings")}</Text>
                     </View>
                     <View style={styles.body}>
                         <View style={{ width: '100%', height: '13%', maxHeight: 80, justifyContent: 'space-between', borderBottomWidth: 1, borderColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Price-update")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Price-update")}</Text>
                             <View style={{ zIndex: 0, elevation: 0, width: -1, paddingHorizontal: 20, }}>
-                                <Text style={{ color: '#fff', textAlign: 'right', fontWeight: '600', }}>{t("Price-update-date")}</Text>
+                                {i18next.language == "en" ? (<Text allowFontScaling={true}
+                                    adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthEN} {year}</Text>) : i18next.language == "my" ? (<Text allowFontScaling={true}
+                                        adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthMY} {year}</Text>) : i18next.language == 'ch' ? (<Text allowFontScaling={true}
+                                            adjustsFontSizeToFit={true} style={styles.whiteText}> {year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : i18next.language == 'jp' ? (<Text allowFontScaling={true}
+                                                adjustsFontSizeToFit={true} style={styles.whiteText}>{year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : null}
                             </View>
                         </View>
                         <View style={{ width: '100%', height: '13%', maxHeight: 80, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 10, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Language")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Language")}</Text>
                             <View style={{ zIndex: 0, elevation: 0, width: '34%', paddingRight: 10 }}>
                                 <DropDownPicker
                                     open={open}
@@ -127,7 +194,10 @@ export default function SettingsScreen({ navigation }) {
                                 Linking.openURL('https://play.google.com/store/apps/details?id=com.fccalculator')
                             }}>
                             <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Share_App")}</Text>
+                                <Text
+                                    allowFontScaling={true}
+                                    adjustsFontSizeToFit={true}
+                                    style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Share_App")}</Text>
                                 <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
                                     <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
                                 </View>
@@ -139,7 +209,10 @@ export default function SettingsScreen({ navigation }) {
                                 Linking.openURL('mailto:developer@crane-a.co.jp?subject=Diamond Apps Inquiry&body=Inquiry details:')
                             }}>
                             <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Contact_Author")}</Text>
+                                <Text
+                                    allowFontScaling={true}
+                                    adjustsFontSizeToFit={true}
+                                    style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Contact_Author")}</Text>
                                 <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
                                     <Image style={{ width: 20, height: 20, resizeMode: 'contain', }} source={require('../assets/icons/arrowwhite.png')} />
                                 </View>
@@ -153,7 +226,10 @@ export default function SettingsScreen({ navigation }) {
                             }}
                         >
                             <View style={{ width: '100%', height: '100%', maxHeight: 80, borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 0, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Terms_and_conditions")}</Text>
+                                <Text
+                                    allowFontScaling={true}
+                                    adjustsFontSizeToFit={true}
+                                    style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Terms_and_conditions")}</Text>
                                 <View style={{ alignItems: "center", width: '20%', paddingHorizontal: 20 }}>
                                     <Modal
                                         animationType="slide"
@@ -166,17 +242,26 @@ export default function SettingsScreen({ navigation }) {
                                     >
                                         <View style={styles.centeredView}>
                                             <View style={styles.modalView}>
-                                                <Text style={styles.modalTextTitle}>
+                                                <Text
+                                                    allowFontScaling={true}
+                                                    adjustsFontSizeToFit={true}
+                                                    style={styles.modalTextTitle}>
                                                     {t("Terms_and_conditions")}
                                                 </Text>
-                                                <Text style={{ marginTop: '10%', color: '#808080' }}>
+                                                <Text
+                                                    allowFontScaling={true}
+                                                    adjustsFontSizeToFit={true}
+                                                    style={{ marginTop: '10%', color: '#808080' }}>
                                                     {t("TNC_description")}
                                                 </Text>
                                                 <Pressable
                                                     style={[styles.buttonModalClose]}
                                                     onPress={() => setModalVisible(!modalVisible)}
                                                 >
-                                                    <Text style={styles.Textmodalclose}> {t("close")}</Text>
+                                                    <Text
+                                                        allowFontScaling={true}
+                                                        adjustsFontSizeToFit={true}
+                                                        style={styles.Textmodalclose}> {t("close")}</Text>
 
                                                 </Pressable>
                                             </View>
@@ -192,14 +277,20 @@ export default function SettingsScreen({ navigation }) {
                                 style={{ alignItems: 'center', color: '#FFF', height: '100%', justifyContent: 'center' }}
                                 onPress={reset}
                             >
-                                <Text style={{ color: '#fff', fontWeight: '600' }}>
+                                <Text
+                                    allowFontScaling={true}
+                                    adjustsFontSizeToFit={true}
+                                    style={{ color: '#fff', fontWeight: '600' }}>
                                     {t("Reset")}
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ height: '25%', width: '100%', justifyContent: 'flex-end', alignItems: 'center', }}>
-                            <Text style={{ color: '#fff', justifyContent: 'center', }}>
-                                V1.1
+                        <View style={{ position: 'absolute', bottom: 0, marginBottom: 10, width: '100%', justifyContent: 'flex-end', alignItems: 'center', }}>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={{ color: '#fff', justifyContent: 'center', }}>
+                                V1.2.4
                             </Text>
                         </View>
 
@@ -219,6 +310,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
+    },
+    whiteText: {
+        color: '#fff', textAlign: 'right', fontWeight: '600',
     },
     head: {
         flex: 1,
@@ -256,7 +350,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         textAlign: 'center',
-        fontSize: 15,
+        fontSize: 16,
     },
     modalView: {
         marginHorizontal: 20,

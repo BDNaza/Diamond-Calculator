@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image, SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Text, View, StyleSheet, ImageBackground, Image, BackHandler, Linking, Alert } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-
-import HomeScreen from '../routes/Home'
+import VersionCheck from 'react-native-version-check';
+import i18n from '../languages/i18n'
+import checkVersion from '../function/versioncheck'
 
 
 const Tab = createBottomTabNavigator();
 const loadingscreen = 'Loading';
 const homeScreen = 'Home';
+
+
+
 
 class LoadingScreen extends Component {
     constructor(props) {
@@ -18,6 +21,7 @@ class LoadingScreen extends Component {
     }
 
     componentDidMount() {
+        checkVersion();
         setTimeout(() => {
             this.props.navigation.navigate('Home')
 

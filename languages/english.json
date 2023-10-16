@@ -3,7 +3,7 @@
         "Home":"Home",
   
         "Price":"Price",
-        "Price-update-date":"24 June 2022",
+        "Price-update-date":"11 November 2022",
         "Shape":"Shape",
         "Color":"Color",
         "Clarity":"Clarity",
@@ -27,10 +27,14 @@
         "TNC_description":"Diamond calculator is created to assist users in determining the estimated price range for diamonds based on available criteria eg: Color, Carat, Clarity and shape. The price shown is an estimate based on the updated diamond price. We are not responsible for any losses caused by the use of this application. Thank you for using this app. \n\nFor more information please visit Crane Inc.",
         "close":"close",
         "Input_Error": "Input error",
-        "Input_Detail1": "Please enter value more than 0.0",
+        "Input_Detail1": "Please enter carat value",
         "Input_Detail2": "Please enter numeric value",
-        "Error_Detail1": "Price not available. Please try another combinations"
+        "Error_Detail1": "Price not available. Please try another combinations",
 
+        
+        "versionCheckTitle":"Update Required",
+        "versionCheckContent":"You will have to update your app to the latest version to continue using.",
+        "versionCheckUpdate":"Update"
     }
   }
   

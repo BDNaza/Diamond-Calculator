@@ -4,18 +4,27 @@ import { Text, View, StyleSheet, Appearance, ImageBackground, Image, SafeAreaVie
 import { useTranslation } from 'react-i18next';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import DynamicallySelectedPicker from '../function/DD';
+import checkVersion from '../function/versioncheck'
+import i18next from 'i18next';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
 export default function HomeScreen({ navigation }) {
     const { t, i18n } = useTranslation();
-    const ONE_SECOND_IN_MS = 1;
     const [stateSelectedPicker, setStateSelectedPicker] = useState({
         selectedColorIndex: 1,
         selectedClarityIndex: 1,
         selectedCaratIndex: 1,
         selectedShapeIndex: 1,
     });
+    const [data, setData] = useState("")
+    const [symbol, setSymbol] = useState("")
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+    const [monthEN, setMonthEN] = useState('');
+    const [monthMY, setMonthMY] = useState('');
 
     function updateSelectedShape(index) {
         setStateSelectedPicker((prev) => ({ ...prev, selectedShapeIndex: index }));
@@ -54,10 +63,13 @@ export default function HomeScreen({ navigation }) {
                         item.id_color === JSON.stringify(color) &&
                         item.id_clarity === JSON.stringify(clarity) &&
                         item.id_carat === JSON.stringify(carat)
+
                 );
                 const diamondPrice = JSON.stringify(filtered[0].price)
                 setData(diamondPrice.replace(/\"/g, ""));
                 setSymbol('$')
+
+
             })
             .catch((error) => {
                 console.error(error);
@@ -65,8 +77,59 @@ export default function HomeScreen({ navigation }) {
 
     };
 
-    const [data, setData] = useState("")
-    const [symbol, setSymbol] = useState("")
+    const getDates = () => {
+
+        fetch('https://www.jewel-cafe-staff.com/api/showPrice', {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                const filtered = responseJson.data.filter(
+                    (item) =>
+                        item.id_shape === 1 &&
+                        item.id_color === 1 &&
+                        item.id_clarity === 1 &&
+                        item.id_carat === 1
+                );
+                //convert date from api to log format
+                const date = (JSON.stringify(responseJson.data[0].updated_at)).slice(1, 11).toString();
+                var day = date.slice(8, 10).replace(/^0+/, '');
+                var month = date.slice(5, 7).replace(/^0+/, '');
+                var year = date.slice(0, 4);
+                const formatterMY = new Intl.DateTimeFormat('ms-MY', { month: 'long' });
+                const formatterEN = new Intl.DateTimeFormat('en-MY', { month: 'long' });
+                var monthNameMY = formatterMY.format(new Date(date));
+                var monthNameEN = formatterEN.format(new Date(date));
+
+                setDay(day);
+                setMonth(month);
+                setYear(year);
+                setMonthEN(monthNameEN);
+                setMonthMY(monthNameMY);
+
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    };
+
+    useEffect(() => {
+        checkVersion();
+    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getDates();
+        }, [])
+    );
+
+
     return (
         <SafeAreaView style={styles.main} >
             <ImageBackground source={require('../assets/WelcomeScreen/main-bg.jpg')} resizeMode="cover" style={styles.background}>
@@ -83,18 +146,43 @@ export default function HomeScreen({ navigation }) {
                             tintColor: '#fff',
                         }} />
 
-                    <Text style={styles.headTitle}>
+                    <Text
+                        allowFontScaling={true}
+                        adjustsFontSizeToFit={true}
+                        style={styles.headTitle}>
                         {t("Price")}
                     </Text>
                 </View>
                 <View style={styles.body}>
-                    <Text style={styles.bodyTitle}>{t("Price-update")}{'\n'}{t("Price-update-date")}</Text>
+                    {/* <Text
+                        allowFontScaling={true}
+                        adjustsFontSizeToFit={true} */}
+                    {i18next.language == "en" ? (<Text allowFontScaling={true}
+                        adjustsFontSizeToFit={true} style={styles.bodyTitle}>{t("Price-update")}{'\n'} {day} {monthEN} {year}</Text>) : i18next.language == "my" ? (<Text allowFontScaling={true}
+                            adjustsFontSizeToFit={true} style={styles.bodyTitle}>{t("Price-update")}{'\n'} {day} {monthMY} {year}</Text>) : i18next.language == 'ch' ? (<Text allowFontScaling={true}
+                                adjustsFontSizeToFit={true} style={styles.bodyTitle}>{t("Price-update")}{'\n'} {year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : i18next.language == 'jp' ? (<Text allowFontScaling={true}
+                                    adjustsFontSizeToFit={true} style={styles.bodyTitle}>{t("Price-update")}{'\n'} {year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : null}
+
+
+                    {/* // style={styles.bodyTitle}>{t("Price-update")}{'\n'}{t("Price-update-date")}</Text> */}
                     <View style={styles.scrollArea}>
                         <View style={styles.pickertitle}>
-                            <Text style={styles.scrollAreaShapeTitle}>{t("Shape")}</Text>
-                            <Text style={styles.scrollAreaColorTitle}>{t("Color")}</Text>
-                            <Text style={styles.scrollAreaClarityTitle}>{t("Clarity")}</Text>
-                            <Text style={styles.scrollAreaCaratTitle}>{t("Carat")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaShapeTitle}>{t("Shape")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaColorTitle}>{t("Color")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaClarityTitle}>{t("Clarity")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaCaratTitle}>{t("Carat")}</Text>
                         </View>
                         <View>
                             <DynamicallySelectedPicker
@@ -111,10 +199,16 @@ export default function HomeScreen({ navigation }) {
                             style={{ alignItems: 'center', color: '#FFF', height: '100%', justifyContent: 'center' }}
                             onPress={getPrice}
                         >
-                            <Text style={styles.buttonText}>{t("Calculate")}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.buttonText}>{t("Calculate")}</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.resultNote}>
+                    <Text
+                        allowFontScaling={true}
+                        adjustsFontSizeToFit={true}
+                        style={styles.resultNote}>
                         {t("Diamond_price")} {"\n"}
                         {t("Diamond_price/carat")}
                     </Text>
@@ -131,10 +225,16 @@ export default function HomeScreen({ navigation }) {
                             }}
                         >
                             <Image source={require('../assets/currency/usa.jpg')}></Image>
-                            <Text style={styles.scrollAreaTitle2}>{"USD"}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaTitle2}>{"USD"}</Text>
                         </View>
                         <View style={{ width: '60%', height: '100%', justifyContent: 'center', alignItems: 'center', }}>
-                            <Text style={styles.scrollAreaTitle2}>{symbol}{data}</Text>
+                            <Text
+                                allowFontScaling={true}
+                                adjustsFontSizeToFit={true}
+                                style={styles.scrollAreaTitle2}>{symbol}{data}</Text>
                         </View>
                         <View>
                         </View>
@@ -177,7 +277,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'left',
         paddingLeft: 5,
-        fontSize: RFValue(22, 580),
+        fontSize: 30,
+        // fontSize: RFValue(22, 580),
         width: '100%',
 
     },
@@ -286,7 +387,8 @@ const styles = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
         justifyContent: 'center',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
         width: '20%',
         maxWidth: 80,
         fontFamily: 'Open Sans Light',
@@ -296,7 +398,8 @@ const styles = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
         justifyContent: 'center',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
         width: '20%',
         maxWidth: 80,
         fontFamily: 'Open Sans Light',
@@ -306,7 +409,8 @@ const styles = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
         justifyContent: 'center',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
         width: '20%',
         maxWidth: 80,
         fontFamily: 'Open Sans Light',
@@ -316,7 +420,8 @@ const styles = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
         justifyContent: 'center',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
         width: 80,
         fontFamily: 'Open Sans Light',
         zIndex: 2,
@@ -324,7 +429,8 @@ const styles = StyleSheet.create({
     scrollAreaTitle2: {
         color: '#000',
         textAlign: 'center',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
         width: '40%',
     },
     scrollAreaTitle3: {
@@ -345,14 +451,16 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         textAlign: 'center',
-        fontSize: RFValue(14, 580),
+        fontSize: 16,
+        // fontSize: RFValue(14, 580),
     },
     resultNote: {
         width: '90%',
         color: '#fff',
         marginVertical: '2%',
         fontWeight: '600',
-        fontSize: RFValue(12, 580),
+        fontSize: 16,
+        // fontSize: RFValue(12, 580),
     },
     priceListMain: {
         flexDirection: 'row',
