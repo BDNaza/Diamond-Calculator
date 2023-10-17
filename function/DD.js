@@ -3,7 +3,6 @@ import { View, Dimensions, StyleSheet, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import DynamicallySelectedPicker from "react-native-dynamically-selected-picker";
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
-import SoundPlayer from 'react-native-sound-player'
 
 export default class Example extends React.Component {
 
@@ -16,15 +15,15 @@ export default class Example extends React.Component {
 
   }
 
-  playSong() {
-    try {
-      SoundPlayer.playSoundFile('tick', 'wav');
-      SoundPlayer.setVolume(0.1);
-    } catch (e) {
-      alert('Cannot play the files')
-      console.log('cannot play the song file', e)
-    }
-  }
+  // playSong() {
+  //   try {
+  //     SoundPlayer.playSoundFile('tick', 'wav');
+  //     SoundPlayer.setVolume(0.1);
+  //   } catch (e) {
+  //     alert('Cannot play the files')
+  //     console.log('cannot play the song file', e)
+  //   }
+  // }
 
   filterPrice() { }
 
@@ -50,9 +49,8 @@ export default class Example extends React.Component {
             ]}
             onScroll={({ index, item }) => {
               ReactNativeHapticFeedback.trigger("notificationError", options);
-              this.playSong();
+              // this.playSong();
               this.props.updateSelectedShape(index + 1);
-              // console.log(index + 1 + 'shape')
             }}
             height={200}
             width={70}
@@ -115,8 +113,7 @@ export default class Example extends React.Component {
             onScroll={({ index, item }) => {
               ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedColor(index + 1);
-              this.playSong();
-              // console.log(index + 1, 'Color')
+              // this.playSong();
             }}
             height={200}
             width={60}
@@ -179,8 +176,7 @@ export default class Example extends React.Component {
             onScroll={({ index, item }) => {
               ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedClarity(index + 1);
-              this.playSong();
-              // console.log(index + 1 + 'Clarity')
+              // this.playSong();
             }}
             height={200}
             width={60}
@@ -216,9 +212,7 @@ export default class Example extends React.Component {
             onScroll={({ index, item }) => {
               ReactNativeHapticFeedback.trigger("notificationError", options);
               this.props.updateSelectedCarat(index + 1);
-              this.playSong();
-
-              // console.log(index + 1 + 'Carat')
+              // this.playSong();
             }}
             height={200}
             width={80}

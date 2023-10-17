@@ -1135,7 +1135,6 @@ export default function CalculatorScreen({ navigation }) {
             })
                 .then(response => response.json())
                 .then(responseJson => {
-                    // console.log(responseJson.data);
                     const filtered = responseJson.data.filter(
                         item =>
                             item.id_shape === '1' &&

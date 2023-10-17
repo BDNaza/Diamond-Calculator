@@ -63,8 +63,7 @@ export default function SettingsScreen({ navigation }) {
                 setMonth(month);
                 setYear(year);
                 setMonthEN(monthNameEN);
-
-
+                setMonthMY(monthNameMY);
             })
             .catch((error) => {
                 console.error(error);
@@ -110,6 +109,7 @@ export default function SettingsScreen({ navigation }) {
     const reset = () => {
         setValue('en')
     }
+
     return (
         <TouchableWithoutFeedback onPress={() => setOpen(false)}>
             <SafeAreaView style={styles.main} >
@@ -138,11 +138,10 @@ export default function SettingsScreen({ navigation }) {
                                 adjustsFontSizeToFit={true}
                                 style={{ color: '#fff', paddingHorizontal: 20, fontWeight: '600' }}>{t("Price-update")}</Text>
                             <View style={{ zIndex: 0, elevation: 0, width: -1, paddingHorizontal: 20, }}>
-                                {i18next.language == "en" ? (<Text allowFontScaling={true}
-                                    adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthEN} {year}</Text>) : i18next.language == "my" ? (<Text allowFontScaling={true}
-                                        adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthMY} {year}</Text>) : i18next.language == 'ch' ? (<Text allowFontScaling={true}
-                                            adjustsFontSizeToFit={true} style={styles.whiteText}> {year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : i18next.language == 'jp' ? (<Text allowFontScaling={true}
-                                                adjustsFontSizeToFit={true} style={styles.whiteText}>{year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : null}
+                                {i18next.language == "en" ? (<Text allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthEN} {year}</Text>) :
+                                    i18next.language == "my" ? (<Text allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.whiteText}>{day} {monthMY} {year}</Text>) :
+                                        i18next.language == 'ch' ? (<Text allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.whiteText}> {year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) :
+                                            i18next.language == 'jp' ? (<Text allowFontScaling={true} adjustsFontSizeToFit={true} style={styles.whiteText}>{year} {t("year-symbol")} {month} {t("month-symbol")} {day} {t("day-symbol")}</Text>) : null}
                             </View>
                         </View>
                         <View style={{ width: '100%', height: '13%', maxHeight: 80, justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#fff', zIndex: 10, elevation: 0, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -290,7 +289,7 @@ export default function SettingsScreen({ navigation }) {
                                 allowFontScaling={true}
                                 adjustsFontSizeToFit={true}
                                 style={{ color: '#fff', justifyContent: 'center', }}>
-                                V1.2.4
+                                V1.2.5
                             </Text>
                         </View>
 

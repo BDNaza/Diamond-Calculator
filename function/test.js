@@ -95,7 +95,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -215,7 +215,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -332,7 +332,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -449,7 +449,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -566,7 +566,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -684,7 +684,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -801,7 +801,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -918,7 +918,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1035,7 +1035,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1152,7 +1152,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1269,7 +1269,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1386,7 +1386,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1503,7 +1503,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1620,7 +1620,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1737,7 +1737,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1854,7 +1854,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -1971,7 +1971,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -2088,7 +2088,7 @@ const calcPrice = () => {
         })
             .then(response => response.json())
             .then(responseJson => {
-                // console.log(responseJson.data);
+
                 const filtered = responseJson.data.filter(
                     item =>
                         item.id_shape === '1' &&
@@ -2103,16 +2103,8 @@ const calcPrice = () => {
                 const priceAfterPurchaseDiscount = priceAfterCutDiscount - (purchasevalue / 100) * priceAfterCutDiscount;
                 const priceConvertCurrency = priceAfterPurchaseDiscount * currencyPrice;
                 const floatPrice = parseFloat(priceConvertCurrency);
-                // const priceFixedTwoDP = floatPrice.toFixed(2);
                 setData(floatPrice.toFixed(2));
-                // setData(priceFixedTwoDP);
-                console.log("filtered price: ", diamondPrice);
-                console.log('Carat selected: ', text);
-                console.log("carat value: ", caratValue);
-                console.log('final price: ', data);
-                console.log('currrency price: ', currencyPrice);
-                console.log('currrency symbol: ', currencySymbol);
-                console.log('currency value: ', currencyvalue);
+
             })
             .catch(error => {
                 console.error(error);
